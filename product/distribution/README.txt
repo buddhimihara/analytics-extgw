@@ -66,13 +66,6 @@ who build the technology.
 
 For additional support information please refer to https://wso2telco.com/services
 
-Known issues of WSO2Telco DEP Gateway Analytics
-===============================================
-
-All the open issues pertaining to WSO2Telco DEP Gateway Analytics are reported at the following location:
-
-    https://jira.wso2telco.com/jira/issues/?filter=12805
-
 Issue Tracker
 ==================================
 
@@ -82,4 +75,4 @@ requests through the WSO2Telco JIRA system:
     https://jira.wso2telco.com/jira/secure/Dashboard.jspa?selectPageId=10500
 
 --------------------------------------------------------------------------------
-(c) Copyright 2016 WSO2Telco.
+(c) Copyright 2017 WSO2Telco.
