@@ -19,11 +19,11 @@
     <meta charset="UTF-8">
     <!--<title>Title</title>-->
     <!--<meta http-equiv="content-type" content="" />-->
-    <title>WSO2Telco External Gateway Analyzer 2.0.0 - rc1</title>
+    <title>WSO2Telco External Gateway Analyzer 2.0.0 - rc2</title>
 </head>
 <body>
-<h1>WSO2Telco External Gateway Analyzer 2.0.0 - rc1</h1>
-<p>Configure WSO2Telco External Gateway with External Gateway analyzer</p>
+<h1>WSO2Telco External Gateway Analyzer 2.0.0 - rc2</h1>
+<p>Configure WSO2Telco External Gateway with External Gateway Analyzer</p>
 
 <h2>Setting up the Deployment</h2>
 <p>The deployment consists of configuring 2 products:</p>
@@ -31,10 +31,10 @@
     <li>wso2analytics-extgw</li>
     <li>wso2telcohub</li>
 </ol>
-<h2>Install and Configure the Analytics server</h2>
+<h2>Installing and Configuring the Analytics server</h2>
 <ol>
     <li>Download the analytics distribution ZIP file from <a
-            href="maven.wso2telco.com/nexus/service/local/repositories/releases/content/org/wso2telco/analytics/wso2analytics-extgw/2.0.0-rc1/wso2analytics-extgw-2.0.0-rc1.zip">Nexus</a>
+            href="http://maven.wso2telco.com/nexus/service/local/repositories/releases/content/org/wso2telco/analytics/wso2analytics-extgw/2.0.0-rc1/wso2analytics-extgw-2.0.0-rc1.zip">Nexus</a>
     </li>
     <li>Extract the analytics distribution ZIP file. (The path to this folder will be referred as <strong>&lt;ANALYTICS_HOME&gt;</strong>
         throughout the documentation)
@@ -53,10 +53,10 @@
 </ol>
 <h2>Installing and Configuring the External Gateway to publish data on Analytics</h2>
 <ol>
-    <li>Download WSO2 TELCO HUB (for External Gateway) from <a
-            href="maven.wso2telco.com/nexus/service/local/repositories/releases/content/com/wso2telco/product/dep/wso2telcohub/2.0.0/wso2telcohub-2.0.0.zip">Nexus</a>
+    <li>Download the WSO2 Telco Hub distribution (for External Gateway) ZIP file from <a
+            href="http://maven.wso2telco.com/nexus/service/local/repositories/releases/content/com/wso2telco/product/dep/wso2telcohub/2.0.0/wso2telcohub-2.0.0.zip">Nexus</a>
     </li>
-    <li>The path to this folder will be referred to as <strong>&lt;HUB_HOME&gt;</strong> throughout the documentation
+    <li>Extract the hub distribution ZIP file. (The path to this folder will be referred to as <strong>&lt;HUB_HOME&gt;</strong> throughout the documentation.)
     </li>
     <li>Remove the DAS_AGENT value in <strong>log4j.rootLogger</strong> property from &lt;HUB_HOME>&gt;/repository/conf/log4j.properties
         file
@@ -86,8 +86,8 @@
         </li>
     </ul>
     <li>Click <strong>save</strong></li>
-    <li>Add two user claims as specified here : <a
-            href="http://docs.wso2telco.com/display/HG/Analytics+-+Internal+Gateway">http://docs.wso2telco.com/display/HG/Analytics+-+Internal+Gateway</a>
+    <li>Add two user claims as specified <a
+            href="http://docs.wso2telco.com/display/HG/Installing+and+Running+the+Product">here</a>
     </li>
     <li>Login to https://&lt;HUB-HOST&gt;:9443/carbon/admin/login.jsp and update user profile details</li>
     <li>Now create APIs with the Message Mediators as below to publish stats to External gateway analyzer</li>
