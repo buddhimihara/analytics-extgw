@@ -88,8 +88,12 @@
       "name": "callbackData",
       "type": "STRING"
     },
-   {
+    {
       "name": "ussdAction",
+      "type": "STRING"
+    },
+    {
+      "name": "deliveryStatus",
       "type": "STRING"
     },
     {
