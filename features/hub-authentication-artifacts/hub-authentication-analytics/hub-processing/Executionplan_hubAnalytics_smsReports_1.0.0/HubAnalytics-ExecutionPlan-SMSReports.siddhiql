@@ -46,7 +46,9 @@ insert into SMSProcessedResponse1;
 */
 @info(name = 'query5')
 from tempSMSResponse [(wso2TelcoHubAnalytics:getJSONBody(jsonBody,'inboundSMSMessageList') is null) == false]
-select api, resourcePath, responseTime, serviceTime, serviceProvider,apiPublisher, applicationName, operatorId,responseCode, msisdn,direction,jsonBody,'' as eventType,'' as clientCorrelator, '' as senderAddress,'' as destinationAddress, '' as status, '' as message, 0 as count, '' as operatorCode,'' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
+select api, resourcePath, responseTime, serviceTime, serviceProvider,apiPublisher, applicationName, operatorId,responseCode,
+str:substr(resourcePath,  '/registrations/(.*)/messages(.*)', 1) as msisdn,
+direction, jsonBody,'' as eventType,'' as clientCorrelator, '' as senderAddress,'' as destinationAddress, '' as status, '' as message, 0 as count, '' as operatorCode,'' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
 insert into tempReceiveSMSResponse;
 
 @info(name = 'query6')
@@ -56,7 +58,7 @@ insert into tempReceiveSMSResponse1;
 
 @info(name = 'query7')
 from tempReceiveSMSResponse1
-select api, '' as resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode, msisdn, direction, eventType, clientCorrelator, senderAddress, destinationAddress, status, message, count, operatorCode, messageId, filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
+select api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode, msisdn, direction, eventType, clientCorrelator, senderAddress, destinationAddress, status, message, count, operatorCode, messageId, filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
 insert into SMSProcessedResponse1;
 
 /**
@@ -64,7 +66,9 @@ insert into SMSProcessedResponse1;
 */
 @info(name = 'query8')
 from tempSMSResponse [(wso2TelcoHubAnalytics:getJSONBody(jsonBody,'deliveryInfoList') is null) == false]
-select api, resourcePath, responseTime, serviceTime, serviceProvider,apiPublisher, applicationName, operatorId,responseCode,msisdn,direction,jsonBody, '' as eventType, '' as clientCorrelator, '' as senderAddress, '' as destinationAddress, '' as status, '' as message, 0 as count, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
+select api, resourcePath, responseTime, serviceTime, serviceProvider,apiPublisher, applicationName, operatorId,responseCode,
+str:substr(resourcePath,  '/outbound/(.*)/requests(.*)', 1) as msisdn,
+direction,jsonBody, '' as eventType, '' as clientCorrelator, '' as senderAddress, '' as destinationAddress, '' as status, '' as message, 0 as count, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
 insert into tempDeliveryNotificationSMSPreProcessedResponse;
 
 @info(name = 'query9')
@@ -73,24 +77,32 @@ select api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublish
 insert into SMSProcessedResponse1;
 
 /**
-* Subscribe to delivery notifications 
+* Subscribe to delivery notifications
 */
 @info(name = 'query10')
 from tempSMSResponse [(wso2TelcoHubAnalytics:getJSONBody(jsonBody,'deliveryReceiptSubscription') is null) == false]
-select api, resourcePath, responseTime, serviceTime, serviceProvider,apiPublisher, applicationName, operatorId,responseCode,msisdn,direction,jsonBody, '' as eventType, '' as clientCorrelator, '' as senderAddress, '' as destinationAddress, '' as status, '' as message, 0 as count, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
+select api, resourcePath, responseTime, serviceTime, serviceProvider,apiPublisher, applicationName, operatorId,responseCode, msisdn, direction, jsonBody, '' as eventType, '' as clientCorrelator, '' as senderAddress, '' as destinationAddress, '' as status, '' as message, 0 as count, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
 insert into tempDeliveryRecptSubsResponse;
 
 @info(name = 'query11')
-from tempDeliveryRecptSubsResponse 
-select api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode, msisdn, direction, 'SubscribeToDeliveryNotifications' as eventType, '' as clientCorrelator, senderAddress, destinationAddress, status, '' as message, 0 as count, '' as operatorCode, '' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
+from tempDeliveryRecptSubsResponse
+select api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode,
+str:substr(resourcePath,  '/outbound/(.*)/subscription(.*)', 1) as msisdn,
+direction, 'SubscribeToDeliveryNotifications' as eventType, '' as clientCorrelator, senderAddress, destinationAddress, status, '' as message, 0 as count,
+cast(wso2TelcoHubAnalytics:getJSONBody(jsonBody,'deliveryReceiptSubscription.operatorCode'),'string') as  operatorCode,
+'' as messageId,
+cast(wso2TelcoHubAnalytics:getJSONBody(jsonBody,'deliveryReceiptSubscription.filterCriteria'),'string') as filterCriteria,
+year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
 insert into SMSProcessedResponse1;
 
 /**
 * Stop subscription to delivery notifications
 */
 @info(name = 'query12')
-from tempSMSResponse [(responseCode == '204') and (str:regexp(resourcePath, ".stopsubscribetodelivery/(.*)"))]
-select api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode, msisdn, direction, 'StopSubscriptionToDeliveryNotifications' as eventType, '' as clientCorrelator, '' as senderAddress, '' as destinationAddress, '' as status, '' as message, 0 as count, '' as operatorCode, '' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
+from tempSMSResponse [(responseCode == '204') and (str:regexp(resourcePath, ".*outbound/(.*)/subscription/(.*)"))]
+select api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode,
+str:substr(resourcePath,  '/outbound/(.*)/subscription(.*)', 1) as msisdn,
+direction, 'StopSubscriptionToDeliveryNotifications' as eventType, '' as clientCorrelator, '' as senderAddress, '' as destinationAddress, '' as status, '' as message, 0 as count, '' as operatorCode, '' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
 insert into SMSProcessedResponse1;
 
 /**
@@ -108,7 +120,7 @@ insert into tempMessageNotifcations1;
 
 @info(name = 'query15')
 from tempMessageNotifcations1
-select api, '' as resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode, msisdn, direction, 'SubscribetoMessageNotifcations' as eventType, clientCorrelator, senderAddress, destinationAddress, status, '' as message, 0 as count, operatorCode, '' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
+select api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode, msisdn, direction, 'SubscribetoMessageNotifcations' as eventType, clientCorrelator, senderAddress, destinationAddress, status, '' as message, 0 as count, operatorCode, '' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
 insert into SMSProcessedResponse1;
 
 /**
@@ -116,6 +128,5 @@ insert into SMSProcessedResponse1;
 */
 @info(name = 'query16')
 from tempSMSResponse [(responseCode == '204') and (str:regexp(resourcePath, ".*inbound/subscriptions(.*)"))]
-select api, '' as resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode, msisdn, direction, 'StopSubscriptionToMessageNotifcations' as eventType, '' as clientCorrelator, '' as senderAddress, '' as destinationAddress, '' as status, '' as message, 0 as count, '' as operatorCode, '' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
+select api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId, responseCode, msisdn, direction, 'StopSubscriptionToMessageNotifcations' as eventType, '' as clientCorrelator, '' as senderAddress, '' as destinationAddress, '' as status, '' as message, 0 as count, '' as operatorCode, '' as messageId, '' as filterCriteria, year, month, day, hour, operatorName, apiPublisherID,apiID,department,applicationId
 insert into SMSProcessedResponse1;
-
