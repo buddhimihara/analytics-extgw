@@ -167,9 +167,10 @@ public class SMSAPIStreamProcessor extends StreamProcessor {
                                 clientCorrelator = getObject(outboundSMSMessageRequest, CLIENT_CORRELATOR).toString();
                             }
                             // Get required information for southbound
-                            if (direction.equals(SOUTH_BOUND)) {
+                            if (direction.equals(NORTH_BOUND)) {
                                 if (checkFieldAvailability(outboundSMSMessageRequest, SENDER_ADDRESS)) {
                                     senderAddress = getObject(outboundSMSMessageRequest, SENDER_ADDRESS).toString();
+                                    msisdn = senderAddress;
                                 }
                                 if (checkFieldAvailability(outboundSMSMessageRequest, DELIVERY_INFO_LIST)) {
                                     JSONObject deliveryInfoList = (JSONObject) getObject(outboundSMSMessageRequest,
@@ -181,7 +182,7 @@ public class SMSAPIStreamProcessor extends StreamProcessor {
                                             JSONObject infoObj = (JSONObject) deliveryInfo;
                                             String address = getObject(infoObj, ADDRESS).toString();
                                             String status = getObject(infoObj, DELIVERY_STATUS).toString();
-                                            outputData = new Object[] { api, "", responseTime, serviceTime, serviceProvider,
+                                            outputData = new Object[] { api, resourcePath, responseTime, serviceTime, serviceProvider,
                                                     apiPublisher, applicationName, operatorId, responseCode, msisdn,
                                                     direction, EVENT_TYPE_SEND_SMS, clientCorrelator, senderAddress,
                                                     address, status, message, count, "", "", "", year, month, day,
@@ -194,7 +195,7 @@ public class SMSAPIStreamProcessor extends StreamProcessor {
 
                             }
                             // Get required information for northbound
-                            else if (direction.equals(NORTH_BOUND)) {
+                            else if (direction.equals(SOUTH_BOUND)) {
                                 //Adding empty string values
                                 String senderAddressValue = "";
                                 String statusValue = "";
@@ -249,7 +250,7 @@ public class SMSAPIStreamProcessor extends StreamProcessor {
                                     String messageId = getObject(smsObj, MESSAGE_ID).toString();
                                     message = getObject(smsObj, MESSAGE).toString();
                                     senderAddress = getObject(smsObj, SENDER_ADDRESS).toString();
-                                    outputData = (new Object[] { api, "", responseTime, serviceTime, serviceProvider,
+                                    outputData = (new Object[] { api, resourcePath, responseTime, serviceTime, serviceProvider,
                                             apiPublisher, applicationName, operatorId, responseCode, msisdn, direction,
                                             EVENT_TYPE_RECEIVE_SMS, clientCorrelator, senderAddress, destinationAddress,
                                             "", message, 0, "", messageId, "", year, month, day, hour, operatorName, apiPublisherID, apiID, department, applicationId });
@@ -299,7 +300,7 @@ public class SMSAPIStreamProcessor extends StreamProcessor {
                     } else if (function.equals(EVENT_TYPE_NOTIFICATION_OF_APP_MSGS)) {
                         String destinationAddress = (String) getObject((JSONObject) content.get("subscription"), "destinationAddress");
                         clientCorrelator = (String) getObject((JSONObject) content.get("subscription"), "clientCorrelator");
-                        outputData = (new Object[] { api, "", responseTime, serviceTime, serviceProvider, apiPublisher,
+                        outputData = (new Object[] { api, resourcePath, responseTime, serviceTime, serviceProvider, apiPublisher,
                                 applicationName, operatorId, responseCode, msisdn, direction,
                                 "", clientCorrelator, "", destinationAddress, "", 0, "", "", "", "",
                                 year, month, day, hour, operatorName, apiPublisherID, apiID, department, applicationId });
