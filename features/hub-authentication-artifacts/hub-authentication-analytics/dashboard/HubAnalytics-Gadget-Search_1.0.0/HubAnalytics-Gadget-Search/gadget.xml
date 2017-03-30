@@ -38,6 +38,10 @@
             <script src="js/json.human.js"></script>
 
             <script src="js/core/search-utils.js"></script>
+            <script src="js/core/gadget-core.js"></script>
+            <script src="js/core/gadget-util.js"></script>
+
+
 
         </head>
 
@@ -47,29 +51,36 @@
                     <h2>Search</h2>
                 </div>
                 <div class="row">
-                    <div class="col-3" style="padding-left:15px;border-right:none #8f8c8c solid;"><h4>Enter Keywords</h4>
-                        <div>
-                            <div id="searchFieldList">
-                                <div class="form-group">
+                    <div class="col-3" style="padding-left:15px;border-right:none #8f8c8c solid;">
+
+                        <h5 id="addbtn"><a>+ Add New Field</a></h5>
+
+                        <div id="searchFieldList">
+                            <div id="key0">
+                                <div style="height:2.5em;" class="form-group">
                                     <div class="col-9">
-                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter keyword">
-                                    </div>
-                                    <div>
-                                        <div class="col-3 add-field">
-                                            <a><span class="glyphicon glyphicon-plus plus-button"></span></a>
-                                        </div>
-                                        <div class="col-3 remove-field">
-                                            <a><span class="glyphicon glyphicon-minus minus-button"></span></a>
-                                        </div>
-                                        </div
+                                        <input type="text" class="form-control" id="keyval0" placeholder="Enter keyword">
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                            <div class="col-9" style="background-color:transparent"></div>
-                        </div>
+
+
+
+                            </div>
+                    <button type="button" id="searchbtn" class="btn btn-primary">Search</button>
                     </div>
+
+                    <div class="col-9" style="background-color:#cccccc; height:300px;">
+                        <div id="canvas"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
                 </body>
         </html>
         ]]>

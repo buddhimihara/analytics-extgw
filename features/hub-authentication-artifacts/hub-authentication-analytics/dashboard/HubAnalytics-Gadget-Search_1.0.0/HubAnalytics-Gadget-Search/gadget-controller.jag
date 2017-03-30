@@ -19,8 +19,6 @@
  */
 (function () {
 
-
-
     response.contentType = 'application/json';
     var PROVIDER_CONF = 'provider-conf';
     var PROVIDER_NAME = 'provider-name';
@@ -53,16 +51,16 @@
 
         if (providerConf[PROVIDER_NAME] == "batch") {
 
-                 providerConf.query += "responseTime:["+data.dateStart+" TO "+data.dateEnd+"]";
+                //  providerConf.query += "responseTime:["+data.dateStart+" TO "+data.dateEnd+"]";
                     if (data.operator != "0" && data.operator != undefined) {
                         providerConf.query +=  " AND operatorId:"+ data.operator;
                     }
                     if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
                         providerConf.query +=  " AND serviceProviderId:"+ "\""+ data.serviceProvider+ "\"";
                     }
-                    if (data.msisdn.toLowerCase().trim() != "") {
-                        providerConf.query +=  " AND msisdn:"+ data.msisdn;
-                    }
+                    // if (data.msisdn.toLowerCase().trim() != "") {
+                    //     providerConf.query +=  " AND msisdn:"+ data.msisdn;
+                    // }
                     if (data.applicationName != "0" && data.applicationName != undefined) {
                         providerConf.query +=  " AND applicationId:"+ data.applicationName;
                     }
@@ -102,6 +100,8 @@
           providerConf.query +=  andSign +' _serviceProvider:"'+serviceProvider+'"';
         }
 
+log.info("\n\n###"+stringify(data)+"#####");
+
         var displayStart = data.displayStart;
         var displayLength = data.displayLength;
         var records = data.records;
@@ -113,6 +113,7 @@
             print(providerAPI.getData(providerConf, requestStart, displayLength));
         }
         else{
+            log.info("#######done1######"+stringify(providerConf));
             print(providerAPI.getData(providerConf, 0, 10));
         }
 
