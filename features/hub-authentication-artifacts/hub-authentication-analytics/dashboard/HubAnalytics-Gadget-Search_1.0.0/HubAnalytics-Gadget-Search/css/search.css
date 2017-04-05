@@ -1,0 +1,22 @@
+.plus-button {
+    top:10px;
+    margin-left:10px;
+}
+
+.minus-button {
+    top:8px;
+    margin-left:10px;
+}
+
+.add-field {
+    z-index:0;
+    margin-left: -10px;
+}
+
+.remove-field {
+    z-index:-1;
+}
+
+/*#table_filter {
+    margin-right: -15px;
+}*/
