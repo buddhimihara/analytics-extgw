@@ -43,27 +43,6 @@ $(document).ready(function() {
             var grid = chartConfig.grid;
             var columns = [];
             var no = 0;
-            for(var i = 0; i < data.length; i++ ) {
-                // no = i + 1;
-                data[i].no = i+1;
-
-                try {
-                    var json =  data[i].jsonBody.replace(/\\n/g, "")
-                    .replace(/\\'/g, "\\'")
-                    .replace(/\\"/g, '\\"')
-                    .replace(/\\&/g, "\\&")
-                    .replace(/\\r/g, "\\r")
-                    .replace(/\\t/g, "\\t")
-                    .replace(/\\b/g, "\\b")
-                    .replace("%", "")
-                    .replace(/\\f/g, "\\f");
-
-                    data[i].jsonContent = JsonHuman.format(JSON.parse(json)).outerHTML;
-                }
-                catch (e) {
-                    data[i].jsonContent = data[i].jsonBody;
-                }
-            }
 
             for(var i=0; i < _schema.length; i++) {
                 columns.push(_schema[i]["fieldName"]);
@@ -95,15 +74,12 @@ $(document).ready(function() {
                 wso2gadgets.init(placeholder, view);
                 var view = wso2gadgets.load("chart-0");
                 if (grid) {
-
                         table = $("#table").DataTable({
                             "filter": true,
                             "paging":true,
                             "pagingType": "simple_numbers",
                             "pageLength": 10,
                             "lengthChange": true,
-                            // scrollCollapse: false,
-                            // scrollY:'70vh',
                             "dom": '<"dataTablesTop"' +
                             'f' +
                             '<"dataTables_toolbar">' +
@@ -112,17 +88,45 @@ $(document).ready(function() {
                             '<"dataTablesBottom"' +
                             'lip' +
                             '>',
-                            "info":true
+                            "info":true,
+                            "columnDefs": [
+                                { "type": "num-html", targets: 0 }
+]
                         });
                         //server side pagination has been disabled for the moment. Use this event to capture the click on next page button.
                         // $('#table').on('page.dt', function (e, settings) {
                         //      alert(JSON.stringify(settings));
                         //     update(settings);
                         // });
+
+                        for(var i = 0; i < data.length; i++ ) {
+                            // no = i + 1;
+                            data[i].no = i+1;
+
+                            try {
+                                var json =  data[i].jsonBody.replace(/\\n/g, "")
+                                .replace(/\\'/g, "\\'")
+                                .replace(/\\"/g, '\\"')
+                                .replace(/\\&/g, "\\&")
+                                .replace(/\\r/g, "\\r")
+                                .replace(/\\t/g, "\\t")
+                                .replace(/\\b/g, "\\b")
+                                .replace("%", "")
+                                .replace(/\\f/g, "\\f");
+
+                                data[i].jsonContent = JsonHuman.format(JSON.parse(json)).outerHTML;
+                            }
+                            catch (e) {
+                                data[i].jsonContent = data[i].jsonBody;
+                            }
+
+
+                        }
+
                         var recordsArray = [];
                         for (var j = 0; j < data.length; j++) {
                             var temp = [];
-                            temp.push(data[j].no);
+                            temp.push(parseInt(data[j].no));
                             temp.push(data[j].responseTime);
                             temp.push(data[j].api);
                             temp.push(data[j].jsonContent);
@@ -137,39 +141,39 @@ $(document).ready(function() {
 
         };
 
-        update = function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    no = no + 1;
-                    data[i].no = no;
-                    try {
-                        var json = data[i].jsonBody.replace(/\\n/g, "")
-                            .replace(/\\'/g, "\\'")
-                            .replace(/\\"/g, '\\"')
-                            .replace(/\\&/g, "\\&")
-                            .replace(/\\r/g, "\\r")
-                            .replace(/\\t/g, "\\t")
-                            .replace(/\\b/g, "\\b")
-                            .replace("%", "")
-                            .replace(/\\f/g, "\\f");
-
-                        data[i].jsonContent = JsonHuman.format(JSON.parse(json)).outerHTML;
-                    }
-                    catch (e) {
-                        data[i].jsonContent = data[i].jsonBody;
-                    }
-                }
-
-                var recordsArray = [];
-                for (var j = 0; j < data.length; j++) {
-                    var temp = [];
-                    temp.push(data[j].no);
-                    temp.push(data[j].responseTime);
-                    temp.push(data[j].api);
-                    temp.push(data[j].jsonContent);
-                    recordsArray.push(temp);
-                }
-                table.rows.add(recordsArray).draw();
-        };
+        // update = function (data) {
+        //         for (var i = 0; i < data.length; i++) {
+        //             no = no + 1;
+        //             data[i].no = no;
+        //             try {
+        //                 var json = data[i].jsonBody.replace(/\\n/g, "")
+        //                     .replace(/\\'/g, "\\'")
+        //                     .replace(/\\"/g, '\\"')
+        //                     .replace(/\\&/g, "\\&")
+        //                     .replace(/\\r/g, "\\r")
+        //                     .replace(/\\t/g, "\\t")
+        //                     .replace(/\\b/g, "\\b")
+        //                     .replace("%", "")
+        //                     .replace(/\\f/g, "\\f");
+        //
+        //                 data[i].jsonContent = JsonHuman.format(JSON.parse(json)).outerHTML;
+        //             }
+        //             catch (e) {
+        //                 data[i].jsonContent = data[i].jsonBody;
+        //             }
+        //         }
+        //
+        //         var recordsArray = [];
+        //         for (var j = 0; j < data.length; j++) {
+        //             var temp = [];
+        //             temp.push(data[j].no);
+        //             temp.push(data[j].responseTime);
+        //             temp.push(data[j].api);
+        //             temp.push(data[j].jsonContent);
+        //             recordsArray.push(temp);
+        //         }
+        //         table.rows.add(recordsArray).draw();
+        // };
 
 
         buildChartConfig = function (_chartConfig) {
