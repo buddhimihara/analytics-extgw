@@ -2,10 +2,6 @@ var count = 1;
 var draw;
 
 $(document).ready(function() {
-    $('.minus-button').click(function() {
-        alert("Hello");
-    });
-
     removeField = function(keyval) {
         $("#keydiv"+keyval).hide();
         count = count - 1;
@@ -92,8 +88,9 @@ $(document).ready(function() {
                             "info":true,
                             "columnDefs": [
                                 { "type": "num-html", targets: 0 }
-]
+                            ]
                         });
+                        table.clear();
                         //server side pagination has been disabled for the moment. Use this event to capture the click on next page button.
                         // $('#table').on('page.dt', function (e, settings) {
                         //      alert(JSON.stringify(settings));
@@ -101,9 +98,7 @@ $(document).ready(function() {
                         // });
 
                         for(var i = 0; i < data.length; i++ ) {
-                            // no = i + 1;
                             data[i].no = i+1;
-
                             try {
                                 var json =  data[i].jsonBody.replace(/\\n/g, "")
                                 .replace(/\\'/g, "\\'")
@@ -114,16 +109,12 @@ $(document).ready(function() {
                                 .replace(/\\b/g, "\\b")
                                 .replace("%", "")
                                 .replace(/\\f/g, "\\f");
-
                                 data[i].jsonContent = JsonHuman.format(JSON.parse(json)).outerHTML;
                             }
                             catch (e) {
                                 data[i].jsonContent = data[i].jsonBody;
                             }
-
-
                         }
-
                         var recordsArray = [];
                         for (var j = 0; j < data.length; j++) {
                             var temp = [];
@@ -135,11 +126,9 @@ $(document).ready(function() {
                         }
                         table.rows.add(recordsArray).draw();
                 }
-
             } catch (e) {
                 console.error(e);
             }
-
         };
 
         // update = function (data) {
@@ -195,6 +184,4 @@ $(document).ready(function() {
             conf.charts[0].columns = ["no", "responseTime", "api", "jsonContent"];
             return conf;
         };
-
-
 });
