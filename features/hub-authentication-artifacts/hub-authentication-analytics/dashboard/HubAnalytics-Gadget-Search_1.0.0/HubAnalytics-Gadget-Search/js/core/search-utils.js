@@ -3,8 +3,10 @@ var draw;
 
 $(document).ready(function() {
     removeField = function(keyval) {
-        $("#keydiv"+keyval).hide();
-        count = count - 1;
+        if(count > 1) {
+            $("#keydiv"+keyval).remove();
+            count = count - 1;
+        }
     };
 
     $("#addbtn").click(function() {
