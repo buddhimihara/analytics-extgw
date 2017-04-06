@@ -81,26 +81,28 @@ public class PaymentAPIStreamProcessor extends StreamProcessor {
                     String function = jsonConstantExecutorForFunction.execute((ComplexEvent) compressedEvent).toString();
                     String jsonBody = jsonVariableExecutor.execute((ComplexEvent) compressedEvent).toString();
                     String api = parameterSet[0].toString();
-                    long responseTime = (Long) parameterSet[1];
-                    long serviceTime = (Long) parameterSet[2];
-                    String serviceProvider = parameterSet[3].toString();
-                    String apiPublisher = parameterSet[4].toString();
-                    String applicationName = parameterSet[5].toString();
-                    String operatorId = parameterSet[6].toString();
-                    String responseCode = parameterSet[7].toString();
-                    String msisdn = parameterSet[8].toString();
-                    String direction = parameterSet[9].toString();
+                    String resourcePath = parameterSet[1].toString();
+                    String method = parameterSet[2].toString();
+                    long responseTime = (Long) parameterSet[3];
+                    long serviceTime = (Long) parameterSet[4];
+                    String serviceProvider = parameterSet[5].toString();
+                    String apiPublisher = parameterSet[6].toString();
+                    String applicationName = parameterSet[7].toString();
+                    String operatorId = parameterSet[8].toString();
+                    String responseCode = parameterSet[9].toString();
+                    String msisdn = parameterSet[10].toString();
+                    String direction = parameterSet[11].toString();
 
-                    int year = (Integer) parameterSet[25];
-                    int month = (Integer) parameterSet[26];
-                    int day = (Integer) parameterSet[27];
-                    int hour = (Integer) parameterSet[28];
+                    int year = (Integer) parameterSet[27];
+                    int month = (Integer) parameterSet[28];
+                    int day = (Integer) parameterSet[29];
+                    int hour = (Integer) parameterSet[30];
 
-                    String operatorName = parameterSet[29].toString();
-                    String apiPublisherID = parameterSet[30].toString();
-                    String apiID = parameterSet[31].toString();
-                    String department = parameterSet[32].toString();
-                    String applicationId = parameterSet[33].toString();
+                    String operatorName = parameterSet[31].toString();
+                    String apiPublisherID = parameterSet[32].toString();
+                    String apiID = parameterSet[33].toString();
+                    String department = parameterSet[34].toString();
+                    String applicationId = parameterSet[35].toString();
 
 
                     @SuppressWarnings("deprecation")
@@ -122,16 +124,19 @@ public class PaymentAPIStreamProcessor extends StreamProcessor {
                                     for (Object amountTransaction : amountTransactionsList) {
                                         JSONObject amountTransactionObj = (JSONObject) amountTransaction;
 
+                                        String resourceURL = null;
+                                        String currency = null;
+                                        String description = null;
+                                        double amount = 0;
+
+                                        if (checkFieldAvailability(amountTransactionObj, RESOURCE_URL)) {
+                                            resourceURL = getObject(amountTransactionObj, RESOURCE_URL).toString();
+                                        }
+
                                         String endUserId = getObject(amountTransactionObj, END_USER_ID).toString();
                                         String referenceCode = getObject(amountTransactionObj, REFERENCE_CODE).toString();
                                         String serverReferenceCode = getObject(amountTransactionObj, SERVER_REFERENCE_CODE).toString();
-                                        String resourceURL = getObject(amountTransactionObj, RESOURCE_URL).toString();
                                         String transactionOperationStatus = getObject(amountTransactionObj, TRANSACTION_OPERATION_STATUS).toString();
-
-                                        String currency = null;
-                                        String description = null;
-
-                                        double amount = 0;
 
                                         if (checkFieldAvailability(amountTransactionObj, PAYMENT_AMOUNT)) {
                                             JSONObject paymentAmount = (JSONObject) getObject(amountTransactionObj, PAYMENT_AMOUNT);
@@ -139,13 +144,19 @@ public class PaymentAPIStreamProcessor extends StreamProcessor {
                                             if (checkFieldAvailability(paymentAmount, CHARGING_INFORMATION)) {
                                                 JSONObject chargingInformation = (JSONObject) getObject(paymentAmount, CHARGING_INFORMATION);
 
-                                                currency = getObject(chargingInformation, CURRENCY).toString();
-                                                description = getObject(chargingInformation, DESCRIPTION).toString();
-                                                amount = Double.parseDouble(getObject(chargingInformation, AMOUNT).toString());
+                                                if (checkFieldAvailability(chargingInformation, CURRENCY)) {
+                                                    currency = getObject(chargingInformation, CURRENCY).toString();
+                                                }
+                                                if (checkFieldAvailability(chargingInformation, DESCRIPTION)) {
+                                                    description = getObject(chargingInformation, DESCRIPTION).toString();
+                                                }
+                                                if (checkFieldAvailability(chargingInformation, AMOUNT)) {
+                                                    amount = Double.parseDouble(getObject(chargingInformation, AMOUNT).toString());
+                                                }
                                             }
                                         }
 
-                                        Object[] outputData = new Object[]{api, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId,
+                                        Object[] outputData = new Object[]{api, resourcePath, method, responseTime, serviceTime, serviceProvider, apiPublisher, applicationName, operatorId,
                                                 responseCode, msisdn, direction, "", 0, "", "", 0, "", amount, currency,
                                                 description, serverReferenceCode, "", transactionOperationStatus, referenceCode, endUserId, resourceURL,
                                                 year, month, day, hour, operatorName, apiPublisherID, apiID, department, applicationId};
