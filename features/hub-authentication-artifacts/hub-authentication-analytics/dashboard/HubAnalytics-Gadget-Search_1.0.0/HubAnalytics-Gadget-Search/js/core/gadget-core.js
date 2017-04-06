@@ -55,21 +55,33 @@ $(function () {
     };
 
 
-var keywords;
-    $("#searchbtn").click(function() {
-        keywords = [];
-        $("#canvas").html("");
-        getGadgetLocation(function (gadget_Location) {
-            gadgetLocation = gadget_Location;
-            init();
-            for(var i=0;i<count;i++) {
-                var key_i = $("#keyval"+i).val();
-                keywords.push(key_i);
-            }
-            loadOperators();
-            draw("#canvas", conf[CHART_CONF], schema, providerData);
+    var keywords;
+        $("#searchbtn").click(function() {
+            keywords = [];
+            $("#canvas").html("");
+            getGadgetLocation(function (gadget_Location) {
+                gadgetLocation = gadget_Location;
+                init();
+                for(var i=0;i<count;i++) {
+                    var key_i = $("#keyval"+i).val().trim();
+                    if(key_i) {
+                        keywords.push(key_i);
+                    }
+                }
+                if(keywords.length == 0) {
+                    alert("Please enter atleast one keyword to search");
+                }
+                else {
+                    loadOperators();
+                    if(providerData.length > 0) {
+                        draw("#canvas", conf[CHART_CONF], schema, providerData);
+                    }
+                    else {
+                        alert("Your query did not return any results");
+                    }
+                }
+            });
         });
-    });
 
 
     var operators = [];
