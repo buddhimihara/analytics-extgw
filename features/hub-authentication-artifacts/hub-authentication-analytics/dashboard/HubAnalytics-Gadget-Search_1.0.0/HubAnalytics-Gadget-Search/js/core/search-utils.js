@@ -73,6 +73,7 @@ $(document).ready(function() {
             try {
                 wso2gadgets.init(placeholder, view);
                 var view = wso2gadgets.load("chart-0");
+                var table;
                 if (grid) {
                         table = $("#table").DataTable({
                             "filter": true,
