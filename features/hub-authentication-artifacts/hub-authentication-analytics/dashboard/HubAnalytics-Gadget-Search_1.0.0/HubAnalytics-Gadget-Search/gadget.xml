@@ -25,6 +25,7 @@
             <script src="/portal/libs/analytics-wso2-2.0.0/VizGrammar.min.js"></script>
             <script src="/portal/libs/analytics-wso2-2.0.0/wso2gadgets.js"></script>
             <script src="/portal/libs/analytics-wso2-2.0.0/chart-utils.js"></script>
+            <script type="text/javascript" src="js/moment.min.js"></script>
 
             <link rel="stylesheet" type="text/css" href="/portal/libs/bootstrap_3.3.5/css/bootstrap.min.css" />
             <link rel="stylesheet" type="text/css" href="/portal/libs/font-wso2_1.0.0/css/font-wso2.min.css" />

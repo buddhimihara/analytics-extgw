@@ -183,6 +183,10 @@ var getConfig, validate, isProviderRequired, draw, update, setTableInfo;
             for (var i = 0; i < data.length; i++) {
                 no = no + 1;
                 data[i].no = no;
+                var responseTime_unix = data[i].responseTime;
+                var responseTime_unix_sec = parseInt(responseTime_unix/1000);
+                var responseTime_dateTime =  moment.unix(responseTime_unix_sec).format("MM-DD-YYYY HH:mm:ss");
+                data[i].responseTime = responseTime_dateTime;
                 try {
                     var json = data[i].jsonBody.replace(/\\n/g, "")
                         .replace(/\\'/g, "\\'")
