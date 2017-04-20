@@ -17,6 +17,16 @@
     z-index:-1;
 }
 
+#canvas .pagination { margin: 0px 0px !important;}
+
+.dark .dataTables_filter label{
+    margin-left: -2%;
+    margin-top: 2%;
+    padding-right: 3%;
+}
+
+
+
 /*#table_filter {
     margin-right: -15px;
 }*/

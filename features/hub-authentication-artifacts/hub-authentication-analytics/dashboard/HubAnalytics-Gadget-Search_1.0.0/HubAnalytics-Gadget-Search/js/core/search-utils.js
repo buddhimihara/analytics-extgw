@@ -11,16 +11,15 @@ $(document).ready(function() {
 
     $("#addbtn").click(function() {
         if (count > 4) {
-            alert("Only 5 keywords are allowed.");
+            $("#popupcontent p").html('Only 5 keywords are allowed.');
+            $('#notifyModal').modal('show');
             return;
         }
 
         var countStr = count.toString();
         var newSearchField =   '<div id="keydiv'+count+'" style="height:2.5em;" class="form-group">' +
             '<div class="col-11">' +
-            '<input type="text" class="form-control" id="keyval'+countStr+'" placeholder="Enter keyword">' +
-            '</div>' +
-            '<div>' +
+            '<input type="text" class="form-control" id="keyval'+countStr+'" placeholder="Enter keyword '+(count+1) +'">' +
             '<div class="col-1 remove-field" onClick="removeField('+countStr+')" >' +
             '<a><span class="glyphicon glyphicon-minus minus-button"></span></a>' +
             '</div>' +
@@ -28,6 +27,7 @@ $(document).ready(function() {
             '</div>';
         var objNewDiv = document.createElement('div');
         objNewDiv.setAttribute('id', 'key' + count);
+		objNewDiv.setAttribute('class', 'col-2');
         objNewDiv.innerHTML = newSearchField;
         document.getElementById('searchFieldList').appendChild(objNewDiv);
         count = count + 1;
@@ -80,17 +80,20 @@ $(document).ready(function() {
                             "pageLength": 10,
                             "lengthChange": true,
                             "dom": '<"dataTablesTop"' +
-                            'f' +
                             '<"dataTables_toolbar">' +
                             '>' +
                             'rt' +
                             '<"dataTablesBottom"' +
-                            'lip' +
+                            'ipf' +
                             '>',
                             "info":true,
                             "columnDefs": [
                                 { "type": "num-html", targets: 0 }
-                            ]
+                            ],
+							language: {
+                                search: "_INPUT_",
+                                searchPlaceholder: "Filter result"
+                            }
                         });
                         table.clear();
                         //server side pagination has been disabled for the moment. Use this event to capture the click on next page button.
