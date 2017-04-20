@@ -28,6 +28,8 @@ $(function () {
     var REFRESH_INTERVAL = 'refreshInterval';
     var operatorId = 0, serviceProviderId = 0, applicationId = 0;
 
+    $(".nano").nanoScroller();
+
     var init = function () {
         $.ajax({
             url: gadgetLocation + '/conf.json',
@@ -69,7 +71,8 @@ $(function () {
                     }
                 }
                 if(keywords.length == 0) {
-                    alert("Please enter atleast one keyword to search");
+                    $("#popupcontent p").html('Please enter atleast one keyword to search');
+                    $('#notifyModal').modal('show');
                 }
                 else {
                     loadOperators();
@@ -77,7 +80,8 @@ $(function () {
                         draw("#canvas", conf[CHART_CONF], schema, providerData);
                     }
                     else {
-                        alert("Your query did not return any results");
+                        $("#popupcontent p").html('Your query did not return any results');
+                        $('#notifyModal').modal('show');
                     }
                 }
             });

@@ -70,7 +70,11 @@
 
 th.jh-key {
     text-align: left;
+    font-size: 12px;
+    color: #333;
 }
+
+.jh-key , .jh-value {font-size: 12px; }
 
 .jh-type-object>tr,
 .jh-type-array>tr {
