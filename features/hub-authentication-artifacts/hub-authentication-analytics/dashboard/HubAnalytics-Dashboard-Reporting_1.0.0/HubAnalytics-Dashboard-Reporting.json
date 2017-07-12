@@ -149,7 +149,7 @@
         },
         {
             "id":"customer-care-report",
-            "title":"Customer Care",
+            "title":"Dev Support",
             "isanon":false,
             "content":{
                 "default":{
@@ -318,7 +318,7 @@
             "id":"customer-care-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Customer Care",
+            "title":"Dev Support",
             "subordinates":[
 
             ]
