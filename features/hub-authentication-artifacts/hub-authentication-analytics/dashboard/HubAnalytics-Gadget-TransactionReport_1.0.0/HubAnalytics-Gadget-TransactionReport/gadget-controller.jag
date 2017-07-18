@@ -82,7 +82,7 @@
 
             if (data.api != "0" && data.api != undefined) {
 
-                if (jagConf["tableList"][data.apiName.toLowerCase()] != undefined) {
+                if (jagConf["tableList"][data.apiName] != undefined) {
                     tableName = jagConf["tableList"][data.apiName.toLowerCase()];
                     reportColumns = stringify( jagConf[jagConf["reportNames"][data.apiName.toLowerCase()]] );
                 }
