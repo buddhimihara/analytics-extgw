@@ -1,6 +1,6 @@
 {
     "id":"HubAnalytics-Dashboard-Reporting",
-    "title":"Hub Analytics",
+    "title":"External gateway Analytics",
     "description":"",
     "permissions":{
         "viewers":[
@@ -16,7 +16,7 @@
     "pages":[
         {
             "id":"traffic-report",
-            "title":"Traffic Report",
+            "title":"Traffic",
             "isanon":false,
             "content":{
                 "default":{
@@ -82,7 +82,7 @@
         },
         {
             "id":"transaction-report",
-            "title":"Transaction Report",
+            "title":"Transaction",
             "isanon":false,
             "content":{
                 "default":{
@@ -149,7 +149,7 @@
         },
         {
             "id":"customer-care-report",
-            "title":"Customer Care Report",
+            "title":"Dev Support",
             "isanon":false,
             "content":{
                 "default":{
@@ -229,7 +229,7 @@
         },
         {
             "id":"response-time-report",
-            "title":"Response Time Report",
+            "title":"Response Time",
             "isanon":false,
             "content":{
                 "default":{
@@ -293,74 +293,6 @@
                     }
                 }
             }
-        },
-        {
-            "id": "search",
-            "title": "Search",
-            "views": {
-                "content": {
-                    "default": {
-                        "blocks": [
-                            {
-                                "id": "053b3cf22125880591148f343927790d",
-                                "x": 0,
-                                "y": 0,
-                                "width": 12,
-                                "height": 12,
-                                "banner": false
-                            }
-                        ],
-                        "name": "Default View",
-                        "roles": [
-                            "Internal/everyone"
-                        ]
-                    }
-                },
-                "fluidLayout": false
-            },
-            "content": {
-                "default": {
-                    "053b3cf22125880591148f343927790d": [
-                        {
-                            "id": "HubAnalytics-Gadget-Search-0",
-                            "content": {
-                                "id": "HubAnalytics-Gadget-Search",
-                                "title": "HubAnalytics-Gadget-Search",
-                                "type": "gadget",
-                                "thumbnail": "fs://gadget/HubAnalytics-Gadget-Search/thumbnail.png",
-                                "data": {
-                                    "url": "fs://gadget/HubAnalytics-Gadget-Search/gadget.xml"
-                                },
-                                "isDownloadable": true,
-                                "isDeletable": true,
-                                "storeType": "fs",
-                                "styles": {
-                                    "no_heading": true,
-                                    "hide_gadget": false,
-                                    "titlePosition": "left",
-                                    "title": "HubAnalytics-Gadget-Search"
-                                },
-                                "options": {
-                                    "refreshInterval": {
-                                        "type": "STRING",
-                                        "title": "Refresh Interval",
-                                        "value": "1000000",
-                                        "options": [],
-                                        "required": false
-                                    }
-                                },
-                                "locale_titles": {
-                                    "en": "HubAnalytics-Gadget-Search"
-                                },
-                                "settings": {
-                                    "priority": "5",
-                                    "timeoutInterval": "60000"
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
         }
     ],
     "menu":[
@@ -368,7 +300,7 @@
             "id":"traffic-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Traffic Report",
+            "title":"Traffic",
             "subordinates":[
 
             ]
@@ -377,7 +309,7 @@
             "id":"transaction-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Transaction Report",
+            "title":"Transaction",
             "subordinates":[
 
             ]
@@ -386,7 +318,7 @@
             "id":"customer-care-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Customer Care Report",
+            "title":"Dev Support",
             "subordinates":[
 
             ]
@@ -395,16 +327,10 @@
             "id":"response-time-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Response Time Report",
+            "title":"Response Time",
             "subordinates":[
 
             ]
-        },
-        {
-            "id": "search",
-            "ishidden": false,
-            "title": "Search",
-            "subordinates": []
         }
     ],
     "hideAllMenuItems":false,
