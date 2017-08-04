@@ -92,6 +92,10 @@
                 providerConf.query += "applicationId:" + data.applicationId;
                 all = false;
             }
+            if (data.serviceProvider != "0" && data.serviceProvider != "(0)" && data.operator != undefined) {
+                providerConf.query += "serviceProviderId:" + data.serviceProvider;
+                all = false;
+            }
         }
 
         var andSign = '';
