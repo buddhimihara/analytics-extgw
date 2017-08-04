@@ -150,6 +150,8 @@ $(function () {
             contentType: "application/json",
             async: false,
             success: function (data) {
+                $("#button-operator").text('All Service Operator');
+                $("#button-operator").append('&nbsp;<span class="caret"></span>');
                 conf.operatorNames = setDropdown("#dropdown-operator", "#button-operator", data, conf.operatorName, "operatorName",null, null);
                 loadSP();             
                 $("#dropdown-operator li a").click(function () {                   
@@ -172,6 +174,8 @@ $(function () {
             contentType: "application/json",
             async: false,
             success: function (data) {
+                $("#button-sp").text('All Service Operator');
+                $("#button-sp").append('&nbsp;<span class="caret"></span>');
                 conf.spIds = setDropdown("#dropdown-sp", "#button-sp", data, conf.serviceProvider, "serviceProviderId", "@carbon.super","serviceProvider");
                 loadApp();             
                 $("#dropdown-sp li a").click(function () {                                        
@@ -194,6 +198,8 @@ $(function () {
             contentType: "application/json",
             async: false,
             success: function (data) {
+                $("#button-app").text('All Service Application');
+                $("#button-app").append('&nbsp;<span class="caret"></span>');
                 conf.applications = setDropdown("#dropdown-app", "#button-app", data, conf.applicationId, "applicationId",null, "applicationName");
                 $("#dropdown-app li a").click(function () {
                     providerButtons("#button-app", this);

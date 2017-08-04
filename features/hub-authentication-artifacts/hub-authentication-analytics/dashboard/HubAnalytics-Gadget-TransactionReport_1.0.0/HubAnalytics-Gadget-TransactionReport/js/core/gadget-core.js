@@ -83,6 +83,7 @@ $(function () {
 
     $("#button-generate").click(function () {
         $("#canvas").html("");
+        $("#output").html("");
         getGadgetLocation(function (gadget_Location) {
             gadgetLocation = gadget_Location;
             conf.operator = operatorId;
@@ -190,7 +191,6 @@ $(function () {
                     }
 
           function loadSP (clickedOperator){
-
             conf["provider-conf"]["tableName"] = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_API_SUMMARY";
             conf["provider-conf"]["provider-name"] = "operator";
             conf.operator =  "("+clickedOperator+")";
@@ -202,6 +202,8 @@ $(function () {
                 async: false,
                 success: function (data) {
                     $("#dropdown-sp").empty();
+                    $("#button-sp").text('All Service provider');
+                    $("#button-sp").append('&nbsp;<span class="caret"></span>');
                     var spItems = '';
                     var spIds = [];
                     var loadedSps = [];
@@ -239,8 +241,7 @@ $(function () {
         }
 
         function loadApp (sps){
-        // alert(sps);
-        // if(sps)
+
         conf["provider-conf"]["tableName"] = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_API_SUMMARY";
         conf["provider-conf"]["provider-name"] = "sp";
         conf.serviceProvider = "("+sps+")";
@@ -251,14 +252,16 @@ $(function () {
             contentType: "application/json",
             async: false,
             success: function (data) {
-
                 $("#dropdown-app").empty();
+                $("#button-app").text('All Application');
+                $("#button-app").append('&nbsp;<span class="caret"></span>');
                 var apps = [];
                 var loadedApps = [];
                 var appItems = '<li><a data-val="0" href="#">All Application</a></li>';
                 apps.push(applicationId);
                 for ( var i =0 ; i < data.length; i++) {
                     var app = data[i];
+
                     if($.inArray(app.applicationId, loadedApps)<0){
                     appItems += '<li><a data-val='+ app.applicationId +' href="#">' + app.applicationName +'</a></li>'
                     apps.push(" "+app.applicationId);
@@ -290,6 +293,7 @@ $(function () {
       }
 
       function loadApi (apps){
+
       conf["provider-conf"]["tableName"] = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_API_SUMMARY";
       conf["provider-conf"]["provider-name"] = "app";
       conf.applicationId = "("+apps+")";;
@@ -303,6 +307,8 @@ $(function () {
           success: function (data) {
 
               $("#dropdown-api").empty();
+              $("#button-api").text('All Api');
+              $("#button-api").append('&nbsp;<span class="caret"></span>');
               var apis = [];
               var loadedApis = [];
               var apiItems = '<li><a data-val="0" href="#">All Api</a></li>';
@@ -324,7 +330,6 @@ $(function () {
                   $("#button-api").val($(this).text());
                   apiId = $(this).data('val');
               });
-
           }
       });
     }
