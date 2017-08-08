@@ -196,6 +196,8 @@ $(function () {
             conf["provider-conf"]["tableName"] = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_API_SUMMARY";
             conf["provider-conf"]["provider-name"] = "operator";
             conf.operator =  "("+clickedOperator+")";
+            serviceProviderId =0;
+
             $.ajax({
                 url: gadgetLocation + '/gadget-controller.jag?action=getData',
                 method: "POST",
@@ -261,7 +263,7 @@ console.log("load app ---- " + sps);
                 var apps = [];
                 var loadedApps = [];
                 var appItems = '<li><a data-val="0" href="#">All Application</a></li>';
-                apps.push(applicationId);
+
                 for ( var i =0 ; i < data.length; i++) {
                     var app = data[i];
 console.log("loaded apps --- " + app.applicationName);
