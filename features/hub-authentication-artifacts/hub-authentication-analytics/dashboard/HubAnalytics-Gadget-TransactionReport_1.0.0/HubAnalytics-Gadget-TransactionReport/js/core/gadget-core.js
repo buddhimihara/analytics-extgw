@@ -149,7 +149,7 @@ $(function () {
         init();
         loadOperator();
 		
-          function loadOperator (){
+          function loadOperator () {
                       conf["provider-conf"]["tableName"] = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_OPERATOR_SUMMARY";
                       conf["provider-conf"]["provider-name"] = "operator";
                       conf.operator = 0;
@@ -169,11 +169,12 @@ $(function () {
                               operatorsItems += '<li><a data-val="0" href="#">All Operator</a></li>';
                               for (var i =0 ; i < data.length; i++) {
                                   var operator = data[i];
+                                  console.log("loadoperator 11111 --- " + operator.operatorName);
                                   if($.inArray(operator.operatorId, loadedOperator)<0){
-                                  operatorsItems += '<li><a data-val='+ operator.operatorId +' href="#">' + operator.operatorName +'</a></li>';
-                                  operatorIds.push(" "+operator.operatorId);
-                                  loadedOperator.push(operator.operatorId);
-                                }
+                                      operatorsItems += '<li><a data-val='+ operator.operatorId +' href="#">' + operator.operatorName +'</a></li>';
+                                      operatorIds.push(" "+operator.operatorId);
+                                      loadedOperator.push(operator.operatorId);
+                                  }
                               }
                               $("#dropdown-operator").html( $("#dropdown-operator").html() + operatorsItems);
                               $("#button-operator").val('<li><a data-val="0" href="#">All Operator</a></li>');
@@ -191,6 +192,7 @@ $(function () {
                     }
 
           function loadSP (clickedOperator){
+              console.log("loadsp --- " + clickedOperator);
             conf["provider-conf"]["tableName"] = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_API_SUMMARY";
             conf["provider-conf"]["provider-name"] = "operator";
             conf.operator =  "("+clickedOperator+")";
@@ -211,6 +213,7 @@ $(function () {
                     spItems += '<li><a data-val="0" href="#">All Service Provider</a></li>';
                     for ( var i =0 ; i < data.length; i++) {
                         var sp = data[i];
+                        console.log("loaded sps --- " + sp.serviceProvider);
                         if($.inArray(sp.serviceProviderId, loadedSps)<0){
                         spItems += '<li><a data-val='+ sp.serviceProviderId +' href="#">' + sp.serviceProvider.replace("@carbon.super","") +'</a></li>'
                         spIds.push(" "+sp.serviceProviderId);
@@ -241,7 +244,7 @@ $(function () {
         }
 
         function loadApp (sps){
-
+console.log("load app ---- " + sps);
         conf["provider-conf"]["tableName"] = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_API_SUMMARY";
         conf["provider-conf"]["provider-name"] = "sp";
         conf.serviceProvider = "("+sps+")";
@@ -261,7 +264,7 @@ $(function () {
                 apps.push(applicationId);
                 for ( var i =0 ; i < data.length; i++) {
                     var app = data[i];
-
+console.log("loaded apps --- " + app.applicationName);
                     if($.inArray(app.applicationId, loadedApps)<0){
                     appItems += '<li><a data-val='+ app.applicationId +' href="#">' + app.applicationName +'</a></li>'
                     apps.push(" "+app.applicationId);
