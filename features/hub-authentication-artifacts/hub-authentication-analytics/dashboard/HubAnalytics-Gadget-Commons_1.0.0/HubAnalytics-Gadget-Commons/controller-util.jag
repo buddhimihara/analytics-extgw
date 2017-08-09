@@ -173,7 +173,6 @@ function getBatchQuery(data) {
         providerConf.query += " AND operatorName:" + loggedInUser.operatorNameInProfile;
     }
 
-    providerConf.query += ' AND direction:"sb"';
     return providerConf.query;
 }
 
