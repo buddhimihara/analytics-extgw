@@ -44,11 +44,11 @@
 
         log.info("user"+ stringify(user));
 
-
+        var roles = require ("../HubAnalytics-Gadget-Commons/site.json").roles;
         include("../HubAnalytics-Gadget-Commons/controller-util.jag");
         var role = getRole(user);
         var serviceProvider = "";
-        if (role == "serviceProvider") {
+        if (role == roles.serviceprovider_role) {
             serviceProvider = user.username + "@" + user.domain;
         }
 
@@ -96,16 +96,16 @@
         if((role != "admin" &&  all == false) || (providerConf[PROVIDER_NAME] == "batch")){
          andSign =  ' AND ';
         }
-        if(role =="serviceProvider" && (providerConf[PROVIDER_NAME] == "operator" || providerConf[PROVIDER_NAME] == "sp")){
+        if(role == roles.serviceprovider_role && (providerConf[PROVIDER_NAME] == "operator" || providerConf[PROVIDER_NAME] == "sp")){
                   var serviceProviderName = user.username +"@"+ user.domain;
                   providerConf.query +=  andSign +' _serviceProvider:"'+serviceProviderName+'"';
                   providerConf.tableName = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_API_SUMMARY";
 
-        }else if(role =="serviceProvider" && providerConf[PROVIDER_NAME] == "batch"){
-           var serviceProviderName = user.username +"@"+ user.domain;
-          providerConf.query +=  andSign +' _serviceProvider:"'+serviceProviderName+'"';
-        }else if(role =="publisher" && (providerConf[PROVIDER_NAME] == "operator" || providerConf[PROVIDER_NAME] == "batch")){
-          providerConf.query +=  andSign +' _serviceProvider:"'+serviceProvider+'"';
+        }else if(role == roles.serviceprovider_role && providerConf[PROVIDER_NAME] == "batch"){
+            var serviceProviderName = user.username +"@"+ user.domain;
+            providerConf.query +=  andSign +' _serviceProvider:"'+serviceProviderName+'"';
+        }else if(role == roles.publisher_role && (providerConf[PROVIDER_NAME] == "operator" || providerConf[PROVIDER_NAME] == "batch")){
+            providerConf.query +=  andSign +' _serviceProvider:"'+serviceProvider+'"';
         }
         print(providerAPI.getData(providerConf));
 
