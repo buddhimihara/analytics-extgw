@@ -106,7 +106,7 @@ function getDataQuery(data) {
             all = false;
         } else if (loggedInUser.isOperatorAdmin) {
             providerConf.query += "operatorId:" + "(" + data.operator + ")";
-        } else if (data.operator != undefined){
+        } else if (data.operator != undefined && data.operator != '0' && data.operator != '(0)'){
             providerConf.query += "operatorId:" + "(" + data.operator + ")";
         }
 
