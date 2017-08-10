@@ -209,19 +209,7 @@
                         "name":"Default View",
                         "roles":[
                             "admin",
-                            "business-unit-viewer",
-                            "customercare",
-                            "Internal/subscriber",
-                            "external-gateway-admin"
-                        ]
-                    },
-                    "view0":{
-                        "blocks":[
-
-                        ],
-                        "name":"View 0",
-                        "roles":[
-                            "Internal/everyone"
+                            "customercare"
                         ]
                     }
                 }

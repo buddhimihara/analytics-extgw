@@ -99,7 +99,7 @@ function getDataQuery(data) {
         if (data.serviceProvider != "0" && data.serviceProvider != '(0)' && data.operator != undefined) {
 
             if(data.operator != "all")  {
-                providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")" +" AND operatorId:" + "(" + data.operator + ")";
+                providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")" +" AND operatorId:" + "(" + data.operatorList + ")";
             } else  {
                 providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")";
             }
@@ -107,7 +107,7 @@ function getDataQuery(data) {
         } else if (loggedInUser.isOperatorAdmin) {
             providerConf.query += "operatorId:" + "(" + data.operator + ")";
         } else if (data.operator != undefined && data.operator != '0' && data.operator != '(0)'){
-            providerConf.query += "operatorId:" + "(" + data.operator + ")";
+            providerConf.query += "operatorId:" + "(" + data.operatorList + ")";
         }
 
     } else if (providerConf[PROVIDER_NAME] == TYPE.APP) {
@@ -116,7 +116,8 @@ function getDataQuery(data) {
             all = false;
         }
         if (data.serviceProvider != "0" && data.serviceProvider != "(0)" && data.operator != undefined) {
-            providerConf.query += "serviceProviderId:" + data.serviceProvider;
+            providerConf.query += concatQuery(providerConf.query, " serviceProviderId:" + data.serviceProvider);
+
             all = false;
         }
     }
@@ -142,7 +143,16 @@ function getDataQuery(data) {
     } else if (loggedInUser.isPublisher && (providerConf[PROVIDER_NAME] == TYPE.OPERATOR || providerConf[PROVIDER_NAME] == BATCH)) {
         providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
     }
+
+    log.info("providerConf.query  >>  "+providerConf.query);
+    log.info("providerConf[PROVIDER_NAME]  >>  "+providerConf[PROVIDER_NAME]);
+
     return providerConf.query;
+};
+
+function concatQuery(query, newQuery){
+    query +=( (query != null) &&   (query.trim().length > 0))?" AND ":"";
+    return query + newQuery;     
 };
 
 function getBatchQuery(data) {
@@ -158,8 +168,8 @@ function getBatchQuery(data) {
         providerConf.query += " AND serviceProviderId:'" + data.serviceProvider + "'";
     }
 
-    if (data.applicationName != "0" && data.applicationName != undefined) {
-        providerConf.query += " AND applicationId:" + data.applicationName;
+    if (data.applicationId != "0" && data.applicationId != undefined) {
+        providerConf.query += " AND applicationId:" + data.applicationId;
     }
 
     if (data.api != "0" && data.api != undefined) {
@@ -172,7 +182,6 @@ function getBatchQuery(data) {
     } else if (loggedInUser.isOperatorAdmin) {
         providerConf.query += " AND operatorName:" + loggedInUser.operatorNameInProfile;
     }
-
     return providerConf.query;
 }
 
