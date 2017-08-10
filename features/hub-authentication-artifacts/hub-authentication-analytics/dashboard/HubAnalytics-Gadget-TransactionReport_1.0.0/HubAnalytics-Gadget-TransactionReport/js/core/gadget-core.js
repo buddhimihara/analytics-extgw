@@ -278,15 +278,16 @@ $(function () {
                 loadApi(apps);
 
                 $("#dropdown-app li a").click(function(){
-
                     $("#button-app").text($(this).text());
                     $("#button-app").append('&nbsp;<span class="caret"></span>');
                     $("#button-app").val($(this).text());
-                    // var clickedSP = [];
-                    // clickedSP.push($(this).data('val'));
-                    apps = $(this).data('val');
-                    applicationId = apps;
-                    loadApi(apps);
+
+                    applicationId = $(this).data('val');
+                    if(applicationId == 0){  
+                        loadApi(apps);
+                    } else {
+                        loadApi(applicationId);
+                    }
                 });
 
             }
