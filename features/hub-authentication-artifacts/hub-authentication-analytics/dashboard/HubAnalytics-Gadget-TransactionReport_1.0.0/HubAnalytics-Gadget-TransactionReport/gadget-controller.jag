@@ -38,6 +38,7 @@
     var log = new Log();
 
     role = getRole(user);
+    var loggedInUser = getLoggedInUser();
 
     if (action === 'getSchema') {
 
