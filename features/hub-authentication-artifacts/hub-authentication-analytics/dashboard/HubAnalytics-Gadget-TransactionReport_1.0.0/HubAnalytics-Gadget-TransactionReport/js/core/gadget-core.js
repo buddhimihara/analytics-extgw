@@ -177,6 +177,10 @@ $(function () {
                               }
                               $("#dropdown-operator").html( $("#dropdown-operator").html() + operatorsItems);
                               $("#button-operator").val('<li><a data-val="0" href="#">All Operator</a></li>');
+
+                              conf.operatorList = operatorIds;
+                              
+
                               loadSP(operatorIds);
 
                               $("#dropdown-operator li a").click(function(){
@@ -275,7 +279,10 @@ $(function () {
             //    $("#button-app").text('All');
                 // loadApp(sps[i]);
 
+                conf.applicationName = 0;
+                
                 loadApi(apps);
+               
 
                 $("#dropdown-app li a").click(function(){
                     $("#button-app").text($(this).text());

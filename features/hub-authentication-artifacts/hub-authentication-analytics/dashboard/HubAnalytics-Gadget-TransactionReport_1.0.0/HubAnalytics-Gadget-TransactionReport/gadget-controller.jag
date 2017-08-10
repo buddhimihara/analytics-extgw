@@ -74,7 +74,6 @@
 
             var providerConf = data[PROVIDER_CONF];
             var providerAPI = require('js/core/' + providerConf[PROVIDER_NAME] + '-provider-api.js');
-            log.info('providerConf[PROVIDER_NAME] ' + providerConf[PROVIDER_NAME]);
 
             var jagConf = require('jagConf.json');
             var tableName = jagConf["tableList"]["all"];// "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_PROCESSEDSTATISTICS";
@@ -127,6 +126,8 @@
         }
     }
 }());
+
+
 
 function removeAllFiles(userReportDirectory, reportPrefix1) {
     var file = new File(userReportDirectory);
