@@ -1,6 +1,6 @@
 {
     "id":"HubAnalytics-Dashboard-Reporting",
-    "title":"External gateway Analytics",
+    "title":"External Gateway Analytics",
     "description":"",
     "permissions":{
         "viewers":[
@@ -25,7 +25,7 @@
                             "id":"HubAnalytics-Gadget-TrafficReport-0",
                             "content":{
                                 "id":"HubAnalytics-Gadget-TrafficReport",
-                                "title":"HubAnalytics-Gadget-TrafficReport",
+                                "title":"Traffic",
                                 "type":"gadget",
                                 "thumbnail":"fs://gadget/HubAnalytics-Gadget-TrafficReport/thumbnail.png",
                                 "data":{
@@ -91,7 +91,7 @@
                             "id":"HubAnalytics-Gadget-TransactionReport-0",
                             "content":{
                                 "id":"HubAnalytics-Gadget-TransactionReport",
-                                "title":"HubAnalytics-Gadget-TransactionReport",
+                                "title":"Transaction",
                                 "type":"gadget",
                                 "thumbnail":"fs://gadget/HubAnalytics-Gadget-TransactionReport/thumbnail.png",
                                 "data":{
@@ -158,7 +158,7 @@
                             "id":"HubAnalytics-Gadget-CustomerCareReport-0",
                             "content":{
                                 "id":"HubAnalytics-Gadget-CustomerCareReport",
-                                "title":"HubAnalytics-Gadget-CustomerCareReport",
+                                "title":"Dev Support",
                                 "type":"gadget",
                                 "thumbnail":"fs://gadget/HubAnalytics-Gadget-CustomerCareReport/thumbnail.png",
                                 "data":{
@@ -226,7 +226,7 @@
                             "id":"HubAnalytics-Gadget-ResponseTimeReport-0",
                             "content":{
                                 "id":"HubAnalytics-Gadget-ResponseTimeReport",
-                                "title":"HubAnalytics-Gadget-ResponseTimeReport",
+                                "title":"Response Time",
                                 "type":"gadget",
                                 "thumbnail":"fs://gadget/HubAnalytics-Gadget-ResponseTimeReport/thumbnail.png",
                                 "data":{
