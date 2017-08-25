@@ -94,7 +94,8 @@
                 all = false;
             }
             if (data.serviceProvider != "0" && data.serviceProvider != "(0)" && data.operator != undefined) {
-                providerConf.query += "serviceProviderId:" + data.serviceProvider;
+                providerConf.query = concatQuery(providerConf.query, "serviceProviderId:" + data.serviceProvider);
+                //providerConf.query += " AND " + "serviceProviderId:" + data.serviceProvider;
                 all = false;
             }
         }
@@ -117,7 +118,7 @@
             providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
         }
 
-        log.info("query ----- " + providerConf.query) ;
+        log.info("query ==> " + providerConf.query) ;
         print(providerAPI.getData(providerConf));
         return;
     }
@@ -228,6 +229,12 @@ function removeAllFiles(userReportDirectory, reportPrefix1) {
             var result = file.listFiles()[i].del();
         }
     }
+};
+
+
+function concatQuery(query, newQuery){
+    query +=( (query != null) &&   (query.trim().length > 0))?" AND ":"";
+    return query + newQuery;
 };
 
 %>
