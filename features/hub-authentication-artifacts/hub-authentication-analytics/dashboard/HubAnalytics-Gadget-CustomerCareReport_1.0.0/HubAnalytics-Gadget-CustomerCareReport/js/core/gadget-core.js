@@ -150,7 +150,7 @@ $(function () {
             contentType: "application/json",
             async: false,
             success: function (data) {
-                $("#button-operator").text('All Service Operator');
+                $("#button-operator").text('All Operator');
                 $("#button-operator").append('&nbsp;<span class="caret"></span>');
                 conf.operatorNames = setDropdown("#dropdown-operator", "#button-operator", data, conf.operatorName, "operatorName",null, null);
                 loadSP();             
@@ -174,7 +174,7 @@ $(function () {
             contentType: "application/json",
             async: false,
             success: function (data) {
-                $("#button-sp").text('All Service Operator');
+                $("#button-sp").text('All Service Provider');
                 $("#button-sp").append('&nbsp;<span class="caret"></span>');
                 conf.spIds = setDropdown("#dropdown-sp", "#button-sp", data, conf.serviceProvider, "serviceProviderId", "@carbon.super","serviceProvider");
                 loadApp();             
