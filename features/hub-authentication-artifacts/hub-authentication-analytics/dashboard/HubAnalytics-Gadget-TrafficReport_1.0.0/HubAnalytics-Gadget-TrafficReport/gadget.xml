@@ -118,7 +118,7 @@
                         <div class="col-xs-2">
                             <button id="button-app" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">All Application
                             &nbsp;<span class="caret"></span></button>
-                            <ul  id="dropdown-app" class="dropdown-menu">
+                            <ul id="dropdown-app" class="dropdown-menu">
                             <li><a href="#">All Application</a></li>
                             </ul>
                         </div>
@@ -126,7 +126,7 @@
                 <div class="col-xs-2">
                     <button id="button-api" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">All API
                     <span class="caret"></span></button>
-                    <ul  id="dropdown-api" class="dropdown-menu">
+                    <ul id="dropdown-api" class="dropdown-menu">
                       <li><a href="#">All API</a></li>
                     </ul>
                 </div>
