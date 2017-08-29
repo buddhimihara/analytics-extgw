@@ -34,7 +34,7 @@
     include("../HubAnalytics-Gadget-Commons/controller-util.jag");
     var user = session.get('user');
     var role = getRole(user);
-    var operatorInProfile = getOperator(user);
+    //var operatorInProfile = getOperator(user);
 
     if(action === 'getDataForTable'){
 
@@ -69,10 +69,12 @@
         var application = request.getParameter("a[application]");
         var dateEnd = request.getParameter("a[dateEnd]");
         var dateStart = request.getParameter("a[dateStart]");
+        /*
         if (ROLE_OPERATORADMIN == role || ROLE_CUTOMERCARE == role){
-            var operatorQuery = "operatorName:"+operatorInProfile;
-            providerConf.query = concatQuery(providerConf.query, operatorQuery);
+    //        var operatorQuery = "operatorName:"+operatorInProfile;
+      //      providerConf.query = concatQuery(providerConf.query, operatorQuery);
         }
+        */
         var recordsTotal=providerAPI.getRecordCount(providerConf);
 
         providerConf.query = "responseTime:["+dateStart+" TO "+dateEnd+"] ";
@@ -114,12 +116,12 @@ log.info("providerConf.query >> "+providerConf.query);
             providerConf.tableName = TABLE_API_SUMMARY;
             providerConf.query = createQuery(data.serviceProvider, data.spIds, providerConf.query, "serviceProviderId");
         } 
-
+/*
         if (ROLE_OPERATORADMIN == role || ROLE_CUTOMERCARE == role){
             var operatorQuery = "operatorName:"+operatorInProfile;
             providerConf.query = concatQuery(providerConf.query, operatorQuery);
         }
-
+*/
         print(providerAPI.getData(providerConf));
     }
 
