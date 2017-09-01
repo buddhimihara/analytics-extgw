@@ -352,7 +352,11 @@ body.dark .list-group-item{
 
 .filterDiv .dropdown-toggle{
     min-width: 25%;
-    background-color: #dfdfdf;}
+    background-color: #dfdfdf;
+    max-height:250px;
+    overflow:auto;
+}
+
 
 .curve-btn{
     border-radius: 2px;
