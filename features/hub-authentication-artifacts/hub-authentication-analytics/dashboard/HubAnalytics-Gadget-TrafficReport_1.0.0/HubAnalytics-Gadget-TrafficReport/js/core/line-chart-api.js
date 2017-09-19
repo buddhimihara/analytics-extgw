@@ -200,7 +200,7 @@ var getConfig, validate, isProviderRequired, draw, update;
     buildChartConfig = function(_chartConfig) {
         var conf = {};
         conf.x = "eventTimeStamp";
-        conf.xTitle = "Event Timestamp";
+        conf.xTitle = "Event Time";
         conf.yTitle = "Total Count";
         conf.height = 400;
         conf.color = _chartConfig.color;
