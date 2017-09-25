@@ -108,6 +108,7 @@ function getDataQuery(data) {
             providerConf.query += "operatorId:" + "(" + data.operator + ")";
         } else if (data.operator != undefined && data.operator != '0' && data.operator != '(0)'){
             providerConf.query += "operatorId:" + "(" + data.operatorList + ")";
+            all =  false;
         }
 
     } else if (providerConf[PROVIDER_NAME] == TYPE.APP) {
@@ -116,15 +117,14 @@ function getDataQuery(data) {
             all = false;
         }
         if (data.serviceProvider != "0" && data.serviceProvider != "(0)" && data.operator != undefined) {
-            providerConf.query += concatQuery(providerConf.query, " serviceProviderId:" + data.serviceProvider);
-
+            providerConf.query = concatQuery(providerConf.query, " serviceProviderId:" + data.serviceProvider);
             all = false;
         }
     }
 
     var andSign = '';
 
-    if ((!(loggedInUser.isAdmin) && all == false) || (providerConf[PROVIDER_NAME] == BATCH)) {
+    if ((!(loggedInUser.isAdmin) && all == false) /*|| (providerConf[PROVIDER_NAME] == BATCH)*/) {
         andSign = ' AND ';
     }
 
@@ -132,7 +132,6 @@ function getDataQuery(data) {
      providerConf.query += andSign + " operatorName:" + loggedInUser.operatorNameInProfile;
 
      }*/
-
     if (loggedInUser.isServiceProvider && (providerConf[PROVIDER_NAME] == TYPE.OPERATOR || providerConf[PROVIDER_NAME] == TYPE.SP)) {
         providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
         providerConf.tableName = STREAM.API_SUMMERY;
