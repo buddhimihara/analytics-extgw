@@ -1,5 +1,6 @@
 package org.wso2telco.analytics.hub.report.engine.internel;
 
+import com.google.gson.Gson;
 import com.jayway.jsonpath.spi.impl.JacksonProvider;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +15,9 @@ import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2telco.analytics.hub.report.engine.ReportEngineService;
 import org.wso2telco.analytics.hub.report.engine.internel.ds.ReportEngineServiceHolder;
+import org.wso2telco.analytics.hub.report.engine.internel.model.LoggedInUser;
 import org.wso2telco.analytics.hub.report.engine.internel.util.CSVWriter;
+import org.wso2telco.analytics.hub.report.engine.internel.util.PDFWriter;
 import org.wso2telco.analytics.hub.report.engine.internel.util.ReportEngineServiceConstants;
 
 import java.io.IOException;
@@ -226,11 +229,11 @@ class PDFReportEngineGenerator implements Runnable {
                 String filepath;
                 if (isServiceProvider) {
                     filepath = "/repository/conf/spinvoice";
-                } /*else if (loggedInUser.isOperatorAdmin()) {
+                /*} else if (loggedInUser.isOperatorAdmin()) {
                     filepath = "/repository/conf/sbinvoice_no_op";
                 } else if ("sb".equalsIgnoreCase(direction)) {
-                    filepath = "/repository/conf/sbinvoice";
-                } else {*/
+                    filepath = "/repository/conf/sbinvoice";*/
+                } else {
                     filepath = "/repository/conf/nbinvoice";
                 }
                 generate(tableName, query, filepath, tenantId, 0, searchCount, year, month);
