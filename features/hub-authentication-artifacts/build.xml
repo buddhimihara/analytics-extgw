@@ -17,6 +17,10 @@
     <property name="ANALYTICS_HUB_PROCESSING_capp" value="org.wso2telco.analytics.hub_processing-1.0.0"/>
     <property name="ANALYTICS_GENERIC_PROCESSING_capp" value="org.wso2telco.analytics.generic_processing-1.0.0"/>
 
+    <property name="PROCESSING_BILL_ARTIFACT_DIRECTORY" value="hub-authentication-analytics/bill-processing"/>
+    <property name="BILL_PROCESSING_ARTIFACT_LIST_DIRECTORY" value="hub-authentication-analytics/artifacts/bill-processing"/>
+    <property name="ANALYTICS_BILL_PROCESSING_capp" value="org.wso2telco.analytics.bill_processing-1.0.0"/>
+
     <target name="clean">
         <delete dir="${target-dir}"/>
     </target>
@@ -37,6 +41,10 @@
         <zip destfile="${resource-dir}/${ANALYTICS_HUB_PROCESSING_capp}.car">
             <zipfileset dir="${PROCESSING_HUB_ARTIFACT_DIRECTORY}"/>
             <zipfileset dir="${HUB_PROCESSING_ARTIFACT_LIST_DIRECTORY}"/>
+        </zip>
+        <zip destfile="${resource-dir}/${ANALYTICS_BILL_PROCESSING_capp}.car">
+            <zipfileset dir="${PROCESSING_BILL_ARTIFACT_DIRECTORY}"/>
+            <zipfileset dir="${BILL_PROCESSING_ARTIFACT_LIST_DIRECTORY}"/>
         </zip>
     </target>
 
