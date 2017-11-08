@@ -24,7 +24,7 @@ $(function () {
 
     var /*operatorName = "all",*/ serviceProviderId = 0;
     var loggedInUser;
-    var selectedOperator;
+    //var selectedOperator;
     //var operatorSelected = false;
 
 

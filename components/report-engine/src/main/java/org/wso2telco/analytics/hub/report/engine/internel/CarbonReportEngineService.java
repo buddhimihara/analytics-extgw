@@ -303,16 +303,16 @@ class PDFReportEngineGenerator implements Runnable {
 
         if (loggedInUser.isAdmin()) {
             try {
-                headerText = ((JSONObject) billingInfo.get("hubName")).getString(loggedInUser.getUsername().replace("@carbon" +
+                headerText = ((JSONObject) billingInfo.get("exgwName")).getString(loggedInUser.getUsername().replace("@carbon" +
                         ".super", ""));
             } catch (JSONException e) {
-                log.warn("couldn't find the hubName from site.json for username " + loggedInUser
+                log.warn("couldn't find the exgwName from site.json for username " + loggedInUser
                         .getUsername().replace("@carbon" +
                                 ".super", ""));
             }
         /*} else if (loggedInUser.isOperatorAdmin()) {
-            headerText = loggedInUser.getOperatorNameInProfile();
-        }*/ else if (loggedInUser.isServiceProvider()) {
+            headerText = loggedInUser.getOperatorNameInProfile();*/
+        } else if (loggedInUser.isServiceProvider()) {
             headerText = loggedInUser.getUsername().replace("@carbon.super", "");
         }
         return headerText;
@@ -323,9 +323,9 @@ class PDFReportEngineGenerator implements Runnable {
 
         try {
             if (loggedInUser.isAdmin()) {
-                promoMessage = ((JSONObject) billingInfo.get("promoMessage")).getString("hubAdmin");
+                promoMessage = ((JSONObject) billingInfo.get("promoMessage")).getString("exgwAdmin");
             /*} else if (loggedInUser.isOperatorAdmin()) {
-                promoMessage = ((JSONObject) billingInfo.get("promoMessage")).getString("operator");
+                promoMessage = ((JSONObject) billingInfo.get("promoMessage")).getString("operator");*/
             } else if (loggedInUser.isServiceProvider()) {
                 promoMessage = ((JSONObject) billingInfo.get("promoMessage")).getString("serviceProvider");
             }

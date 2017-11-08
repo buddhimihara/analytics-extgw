@@ -5,7 +5,6 @@
     "customercare_role": "customercare",
     "serviceprovider_role": "Internal/subscriber",
     "publisher_role":"Internal/publisher"
-
   },
   "billing": {
     "address": {
@@ -15,12 +14,12 @@
       "op2-publisher1": "op2-publisher1\nwso2 telco\nColombo3.",
       "demo-sp1": "demo-sp1\nwso2 telco\nColombo3."
     },
+    "exgwName" : {
+      "admin" : "HUB1"
+    },
     "promoMessage" : {
-      "operator" : "Operator important message",
-      "hubAdmin" : "Hub admin important message",
+      "exgwAdmin" : "Hub admin important message",
       "serviceProvider" : "SP important message"
     }
   }
 }
-
-
