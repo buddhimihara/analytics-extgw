@@ -14,6 +14,10 @@
         <module>components/report-engine</module>
         <module>features/report-generator-artifacts</module>
         <module>features/hub-authentication-artifacts</module>
+        <module>components/org.wso2telco.analytics.dbutil</module>
+        <module>components/org.wso2telco.analytics.pricing</module>
+        <module>features/org.wso2telco.analytics.dbutil.feature</module>
+        <module>features/org.wso2telco.analytics.pricing.feature</module>
         <module>product/p2-profile-gen</module>
         <module>product/distribution</module>
     </modules>
