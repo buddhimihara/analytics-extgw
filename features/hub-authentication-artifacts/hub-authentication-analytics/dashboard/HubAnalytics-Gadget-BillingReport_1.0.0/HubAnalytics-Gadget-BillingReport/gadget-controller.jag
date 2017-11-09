@@ -184,7 +184,7 @@
 
             var reportName = directory + loggedInUser.username.replace("@carbon.super","") + FILE_NAMES.BILLING_REPORT +fileAppend + data.month + "-"+data.year;
             var reportType = "billingCSV";
-            service.generateReport(tableName, providerConf.query, reportName, reportMaxLength, reportType, reportColumns, null, null, null);
+            service.generateCSVReport(tableName, providerConf.query, reportName, reportMaxLength, reportType, reportColumns, null, null, null);
             print({'message': 'Report is generating'});
 
             return;
@@ -245,7 +245,7 @@
                             .BILLING_REPORT + "error-" +fileAppend+ data.month + "-"+data.year;
             var reportType = "billingErrorCSV";
 
-            service.generateReport(tableName, providerConf.query, reportName, reportMaxLength, reportType, reportColumns, null, null, null);
+            service.generateCSVReport(tableName, providerConf.query, reportName, reportMaxLength, reportType, reportColumns, null, null, null);
             print({'message': 'Report is generating'});
 
             return;

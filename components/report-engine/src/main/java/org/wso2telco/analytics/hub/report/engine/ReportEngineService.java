@@ -20,6 +20,7 @@ package org.wso2telco.analytics.hub.report.engine;
 
 public interface ReportEngineService {
 
-    void generateCSVReport(String tableName, String query, String reportName, int maxLength, String reportType, String columns);
+    void generateCSVReport(String tableName, String query, String reportName, int maxLength, String reportType, String columns,
+                           String fromDate, String toDate, String sp);
 
 }

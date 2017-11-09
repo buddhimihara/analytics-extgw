@@ -3,6 +3,7 @@ var carbon = require('carbon');
 
 include("./constants.jag");
 var roles = require ("./site.json").roles;
+var billing = require ("./site.json").billing;
 
 var log = new Log();
 
@@ -18,6 +19,11 @@ var loggedInUser = {
 //TODO: NO need to use get role function do it in single function
 function getLoggedInUser () {
     var user = session.get('user');
+    if(user == null) {
+        response.status=403;
+        return;
+    }
+
     var role = getRole(user);
 
     switch (role) {
@@ -46,6 +52,10 @@ function getLoggedInUser () {
     loggedInUser.operatorNameInProfile = getOperator(user);
 
     return loggedInUser;
+}
+
+function getBillingInfo() {
+    return billing;
 }
 
 function getRole (user) {
@@ -151,7 +161,7 @@ function getDataQuery(data) {
 
 function concatQuery(query, newQuery){
     query +=( (query != null) &&   (query.trim().length > 0))?" AND ":"";
-    return query + newQuery;     
+    return query + newQuery;
 };
 
 function getBatchQuery(data) {
@@ -192,4 +202,30 @@ function isMultiValue(data) {
     }
     return false;
 }
+
+function getFileAppend(data) {
+    var fileAppend="";
+    if (data!=null){
+
+        /*if (data.operatorf.trim() != "All Operator" && data.operatorf !=undefined ) {
+         fileAppend+= data.operatorf+"-";
+         }*/
+
+        if (data.spf.trim() !="All Service provider" && data.spf !=undefined && data.spf.trim() !="All Service Provider") {
+            fileAppend += data.spf + "-";
+        }
+
+
+        if (data.applicationf.trim() != "All Application" && data.applicationf != undefined ) {
+            fileAppend+= data.applicationf+"-";
+        }
+
+        if (data.apif.trim() != "All Api" && data.apif != undefined ) {
+            fileAppend +=  data.apif+"-";
+        }
+
+    }
+    return fileAppend;
+};
+
 %>

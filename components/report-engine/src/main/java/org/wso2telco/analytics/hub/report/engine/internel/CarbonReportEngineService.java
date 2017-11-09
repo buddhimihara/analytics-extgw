@@ -45,11 +45,11 @@ public class CarbonReportEngineService implements ReportEngineService {
     }
 
     public void generateCSVReport(String tableName, String query, String reportName, int maxLength, String
-            reportType, String columns) {
+            reportType, String columns, String fromDate, String toDate, String sp) {
         int tenantId = PrivilegedCarbonContext.getThreadLocalCarbonContext().getTenantId(true);
 
         threadPoolExecutor.submit(new ReportEngineGenerator(tableName, query, maxLength, reportName, tenantId,
-                reportType, columns));
+                reportType, columns, fromDate, toDate, sp));
     }
 
     public void generatePDFReport(String tableName, String query, String reportName, int maxLength, String
@@ -62,27 +62,23 @@ public class CarbonReportEngineService implements ReportEngineService {
     }
 }
 
-
 class ReportEngineGenerator implements Runnable {
 
     private static final Log log = LogFactory.getLog(ReportEngineGenerator.class);
 
     private String tableName;
-
     private String query;
-
     private int maxLength;
-
     private String reportName;
-
     private int tenantId;
-
     private String reportType;
-
     private String columns;
+    private String fromDate;
+    private String toDate;
+    private String sp;
 
     public ReportEngineGenerator(String tableName, String query, int maxLength, String reportName, int tenantId,
-                                 String reportType, String columns) {
+                                 String reportType, String columns, String fromDate, String toDate, String sp) {
         this.tableName = tableName;
         this.query = query;
         this.maxLength = maxLength;
@@ -90,12 +86,14 @@ class ReportEngineGenerator implements Runnable {
         this.tenantId = tenantId;
         this.reportType = reportType;
         this.columns = columns;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.sp = sp;
     }
 
     @Override
     public void run() {
         try {
-
 
             int searchCount = ReportEngineServiceHolder.getAnalyticsDataService()
                     .searchCount(tenantId, tableName, query);
@@ -118,9 +116,16 @@ class ReportEngineGenerator implements Runnable {
             } else if (reportType.equalsIgnoreCase("traffic")) {
                 String filepath = reportName + ".csv";
                 generate(tableName, query, filepath, tenantId, 0, searchCount, writeBufferLength);
+            } else if (reportType.equalsIgnoreCase("billingCSV")) {
+                String filepath = reportName + ".csv";
+                generate(tableName, query, filepath, tenantId, 0, searchCount, writeBufferLength);
+            } else if (reportType.equalsIgnoreCase("billingErrorCSV")) {
+                String filepath = reportName + ".csv";
+                generate(tableName, query, filepath, tenantId, 0, searchCount, writeBufferLength);
+            } else if (reportType.equalsIgnoreCase("responseTimeCSV")) {
+                String filepath = reportName + ".csv";
+                generate(tableName, query, filepath, tenantId, 0, searchCount, writeBufferLength);
             }
-
-
         } catch (AnalyticsException e) {
             log.error("Data cannot be loaded for " + reportName + "report", e);
         }
@@ -173,6 +178,12 @@ class ReportEngineGenerator implements Runnable {
         try {
             if (reportType.equalsIgnoreCase("traffic")) {
                 CSVWriter.writeTrafficCSV(records, writeBufferLength, filePath);
+            } else if (reportType.equalsIgnoreCase("billingErrorCSV")) {
+                CSVWriter.writeErrorCSV(records, writeBufferLength, filePath, dataColumns, columnHeads);
+            } else if (reportType.equalsIgnoreCase("responseTimeCSV")) {
+                CSVWriter.writeResponseTImeCSV(records, writeBufferLength, filePath, dataColumns, columnHeads);
+            } else if (reportType.equalsIgnoreCase("transaction")) {
+                CSVWriter.writeTransactionCSV(records, writeBufferLength, filePath, dataColumns, columnHeads);
             } else {
                 CSVWriter.writeCSV(records, writeBufferLength, filePath, dataColumns, columnHeads);
             }
