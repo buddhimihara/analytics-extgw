@@ -59,7 +59,7 @@
         providerConf.query = "";
         var all = true;
         if (providerConf[PROVIDER_NAME] == BATCH) {
-
+log.info('provider conf is a batch ****** ');
             /*if(loggedInUser.isOperatorAdmin) {
                 providerConf.query += " AND operatorName:" + loggedInUser.operatorNameInProfile;
 
@@ -82,6 +82,8 @@
             }*/
 
         } else if (providerConf[PROVIDER_NAME] == TYPE.SP) {
+            log.info('type sp --- ** ');
+            log.info('data obj is ' + stringify(data));
             if (data.serviceProvider != "0" && data.operatorName != undefined) {
                 /*if(data.operatorName != "all")  {
                     providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")" +" AND operatorName:" + "(" + data.operatorName + ")";

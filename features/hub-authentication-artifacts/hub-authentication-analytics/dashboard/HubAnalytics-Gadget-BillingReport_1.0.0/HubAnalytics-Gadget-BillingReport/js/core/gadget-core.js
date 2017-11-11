@@ -589,9 +589,9 @@ $(function () {
             //conf.operatorName = clickedOperator;
             //selectedOperator = conf.operatorName;
             serviceProviderId = 0;
-
+console.log('logged in user -- '+JSON.stringify(loggedInUser));
             if (!loggedInUser.isServiceProvider) {
-
+console.log('logged in user is not serviceprovider ----- ');
                 $.ajax({
                     url: gadgetLocation + '/gadget-controller.jag?action=getData',
                     method: METHOD.POST,
@@ -600,6 +600,7 @@ $(function () {
                     async: false,
                     success: function (data) {
                         $("#dropdown-sp").empty();
+       console.log('getdata data is  ----- ' + JSON.stringify(data));
                         $("#button-sp").text('All Service provider');
 						$("#button-sp").append('&nbsp;<span class="caret"></span>');
                         var spItems = '';
@@ -625,7 +626,7 @@ $(function () {
                             $("#button-sp").text($(this).text());
                             $("#button-sp").append('&nbsp;<span class="caret"></span>');
                             $("#button-sp").val($(this).text());
-                            serviceProviderId = $(this).data('val');
+                            serviceProviderId = $(this).data('val'); // serviceprovider id should be id not name
 
                             if(serviceProviderId != "0"){
                                 conf.serviceProvider = serviceProviderId;
@@ -669,7 +670,6 @@ $(function () {
         });
     }
 });
-
 
 function downloadFile(index, type) {
     getGadgetLocation(function (gadget_Location) {

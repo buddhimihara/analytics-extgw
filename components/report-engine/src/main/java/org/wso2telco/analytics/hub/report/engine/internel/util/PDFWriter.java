@@ -43,8 +43,7 @@ public class PDFWriter {
         JasperPrint jasperPrint = null;
         try {
             File reportFile = new File(workingDir + jasperFileDir + ".jasper");   //north bound
-            jasperPrint = JasperFillManager.fillReport(reportFile.getPath(), params, getDataSourceDetailReport
-                    (recordList));
+            jasperPrint = JasperFillManager.fillReport(reportFile.getPath(), params, getDataSourceDetailReport(recordList));
             File filename = new File(workingDir + "/" + pdfName);
             filename.getParentFile().mkdirs();
             JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(filename + ".pdf"));
