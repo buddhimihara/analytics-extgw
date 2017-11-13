@@ -30,7 +30,7 @@
     var filter = request.getParameter("filter");
     var data = request.getContent();
 
-
+log.info('data is ---- ' + stringify(data));
 	var loggedInUser = getLoggedInUser();
 
     if(data != null) {
@@ -49,6 +49,7 @@
         return;
 
     } else if (action === 'getData') {
+        log.info(';;;;;;;;;;;;;;;;;;;;;; ' + providerConf[PROVIDER_NAME]);
         var providerAPI = require('js/core/' + providerConf[PROVIDER_NAME] + '-provider-api.js');
 
         var serviceProvider = "";
@@ -70,7 +71,8 @@ log.info('provider conf is a batch ****** ');
             }*/
 
             if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
-                providerConf.query += " AND serviceProviderId: (" + "\"" + data.serviceProvider + "\")";
+                //providerConf.query += " AND serviceProviderId: (" + "\"" + data.serviceProvider + "\")";
+                providerConf.query += " AND serviceProvider: (" + "\"" + data.serviceProvider + "\")";
             }
 
             //providerConf.query += " AND direction:" + "\""+ "sb" + "\"";
@@ -88,7 +90,8 @@ log.info('provider conf is a batch ****** ');
                 /*if(data.operatorName != "all")  {
                     providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")" +" AND operatorName:" + "(" + data.operatorName + ")";
                 } else  {*/
-                    providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")";
+                    //providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")";
+                    providerConf.query += "serviceProvider:" + "(" + data.serviceProvider + ")";
                 //}
                 all = false;
             } /*else {
@@ -115,6 +118,7 @@ log.info('provider conf is a batch ****** ');
         } else if (loggedInUser.isPublisher && (providerConf[PROVIDER_NAME] == TYPE.OPERATOR || providerConf[PROVIDER_NAME] == BATCH)) {
             providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
         }
+
         print(providerAPI.getData(providerConf));
 
         log.info("Table ==> " + providerConf.tableName);
