@@ -203,7 +203,7 @@ $(function () {
                 setTimeout(function () {
                     btn.prop('disabled', false);
                 }, 2000);
-
+console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
                 $.ajax({
                     url: gadgetLocation + '/gadget-controller.jag?action=generateCSV',
                     method: METHOD.POST,

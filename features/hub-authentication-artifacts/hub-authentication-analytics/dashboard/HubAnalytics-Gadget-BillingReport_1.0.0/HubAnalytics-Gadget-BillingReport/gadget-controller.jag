@@ -188,7 +188,7 @@ log.info('provider conf is a batch ****** ');
             log.info("Table ==> " + providerConf.tableName);
             log.info("query ==> " + providerConf.query);
 
-            var reportName = directory + loggedInUser.username.replace("@carbon.super","") + FILE_NAMES.BILLING_REPORT +fileAppend + data.month + "-"+data.year;
+            var reportName = directory + loggedInUser.username.replace("@carbon.super","") + FILE_NAMES.BILLING_REPORT + fileAppend + data.month + "-"+data.year;
             var reportType = "billingCSV";
             service.generateCSVReport(tableName, providerConf.query, reportName, reportMaxLength, reportType, reportColumns, null, null, null);
             print({'message': 'Report is generating'});

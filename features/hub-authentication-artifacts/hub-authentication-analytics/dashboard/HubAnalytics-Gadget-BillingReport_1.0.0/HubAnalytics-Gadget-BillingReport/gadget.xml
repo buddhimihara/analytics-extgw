@@ -52,8 +52,8 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="row filterDiv">
                             <div id="serviceProviderdd">
-                                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2">
-                                    <button id="button-sp" class="btn btn-default dropdown-toggle curve-btn col-xs-12"   type="button" data-toggle="dropdown">All Service Provider
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+                                    <button id="button-sp" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">All Service Provider
                                         <span class="caret"></span>
                                     </button>
                                     <ul id="dropdown-sp" class="dropdown-menu">
@@ -63,44 +63,53 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div id="yearContainer" class="col-xs-4 col-sm-4 col-md-2 col-lg-2 col-top-pad">
-                                <button id="button-year" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul  id="dropdown-year" class="dropdown-menu">
-                                    <!--li>
-                                        <a href="#">Current Year</a>
-                                    </li-->
-                                </ul>
+                            <div id="yearContainer">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+                                    <button id="button-year" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul  id="dropdown-year" class="dropdown-menu">
+                                        <!--li>
+                                            <a href="#">Current Year</a>
+                                        </li-->
+                                    </ul>
+                                </div>
                             </div>
-                            <div id="monthContainer" class="col-xs-4 col-sm-4 col-md-2 col-lg-2 col-top-pad">
-                                <button id="button-month" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul id="dropdown-month" class="dropdown-menu">
-                                    <!--li>
-                                        <a href="#">Select Month</a>
-                                    </li-->
-                                </ul>
+                            <div id="monthContainer">
+                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+                                    <button id="button-month" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul id="dropdown-month" class="dropdown-menu">
+                                        <!--li>
+                                            <a href="#">Select Month</a>
+                                        </li-->
+                                    </ul>
+                                 </div>
                             </div>
+                            <div id="repriceContainer">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+                                    <button type="button" id="button-initiate-reprice" class="btn btn-success curve-btn col-xs-12"><i class="fw fw-sync"></i> Initiate Repricing</button>
+                                </div>
+                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-push-15 col-xs-push-15 col-xs-8 col-sm-8 col-md-4 col-lg-4">
                                 <br>
                                 <label for="button-generate-bill-csv"></label>
-                                <button type="button" id="button-generate-bill-csv"  class="btn btn-primary curve-btn btn-lg col-xs-12"><i class="fw fw-compare"></i> Generate Detail Bill</button>
+                                <button type="button" id="button-generate-bill-csv" class="btn btn-primary curve-btn btn-lg col-xs-12"><i class="fw fw-compare"></i> Generate Detail Bill</button>
                                 <br>
                             </div>
                             <div class="col-sm-push-15 col-xs-push-15 col-xs-8 col-sm-8 col-md-4 col-lg-4">
                                 <br>
                                 <label for="button-generate-bill-pdf"></label>
-                                <button type="button" id="button-generate-bill-pdf"  class="btn btn-primary curve-btn btn-lg col-xs-12"> <i class="fw fw-compare"></i> Generate Summery Bill</button>
+                                <button type="button" id="button-generate-bill-pdf" class="btn btn-primary curve-btn btn-lg col-xs-12"> <i class="fw fw-compare"></i> Generate Summery Bill</button>
                                 <br>
                             </div>
                             <div class="col-sm-push-15 col-xs-push-15 col-xs-8 col-sm-8 col-md-4 col-lg-4" id="generate-error-csv">
                                 <br>
                                 <label for="button-generate-error-csv"></label>
-                                <button type="button" id="button-generate-error-csv"  class="btn btn-primary curve-btn btn-lg col-xs-12"> <i class="fw fw-compare"></i> Generate Error Report</button>
+                                <button type="button" id="button-generate-error-csv" class="btn btn-primary curve-btn btn-lg col-xs-12"> <i class="fw fw-compare"></i> Generate Error Report</button>
                                 <br>
                             </div>
                         </div>
@@ -109,19 +118,19 @@
                             <div class="col-sm-push-15 col-xs-push-15 col-xs-8 col-sm-8 col-md-4 col-lg-4">
                                 <br>
                                 <label for="list-summery-report"></label>
-                                <button type="button" id="list-summery-report"  class="btn btn-warning curve-btn btn-lg col-xs-12"> <i class="fw fw-menu"></i> List Detail Report</button>
+                                <button type="button" id="list-summery-report" class="btn btn-warning curve-btn btn-lg col-xs-12"> <i class="fw fw-menu"></i> List Detail Report</button>
                                 <br> <br>
                             </div>
                             <div class="col-sm-push-15 col-xs-push-15 col-xs-8 col-sm-8 col-md-4 col-lg-4">
                                 <br>
                                 <label for="list-the-bill"></label>
-                                <button type="button" id="list-the-bill"  class="btn btn-warning curve-btn btn-lg col-xs-12"><i class="fw fw-menu"></i> List Summery Bill</button>
+                                <button type="button" id="list-the-bill" class="btn btn-warning curve-btn btn-lg col-xs-12"><i class="fw fw-menu"></i> List Summery Bill</button>
                                 <br> <br>
                             </div>
                             <div class="col-sm-push-15 col-xs-push-15 col-xs-8 col-sm-8 col-md-4 col-lg-4">
                                 <br>
                                 <label for="list-error-report"></label>
-                                <button type="button" id="list-error-report"  class="btn btn-warning curve-btn btn-lg col-xs-12"><i class="fw fw-menu"></i> List Error Report</button>
+                                <button type="button" id="list-error-report" class="btn btn-warning curve-btn btn-lg col-xs-12"><i class="fw fw-menu"></i> List Error Report</button>
                                 <br> <br>
                             </div>
                         </div>
@@ -129,11 +138,6 @@
                         <br/>
                         <div class="col-xs-12">
                             <div id="output"></div>
-                        </div>
-                        <div class="row" id="repriceContainer">
-                            <div class="col-sm-push-15 col-xs-push-15 col-xs-4 col-sm-4 col-md-2 col-lg-2">
-                                <button type="button" id="button-initiate-reprice"  class="btn btn-success curve-btn btn-lg col-xs-12"><i class="fw fw-sync"></i> Initiate Repricing</button>
-                            </div>
                         </div>
                     </div>
 
