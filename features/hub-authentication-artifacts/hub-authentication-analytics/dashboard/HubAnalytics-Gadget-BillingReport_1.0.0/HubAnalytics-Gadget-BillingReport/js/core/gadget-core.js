@@ -22,11 +22,8 @@ $(function () {
 
     var providerData;
 
-    var /*operatorName = "all",*/ serviceProviderId = 0;
+    var serviceProviderId = 0;
     var loggedInUser;
-    //var selectedOperator;
-    //var operatorSelected = false;
-
 
     var init = function () {
         $.ajax({
@@ -36,12 +33,6 @@ $(function () {
             async: false,
             success: function (data) {
                 conf = JSON.parse(data);
-
-                /*if(operatorSelected) {
-                    conf.operatorName =  selectedOperator;
-                } else {
-                    conf.operatorName =  operatorName;
-                } */
                 conf.serviceProvider = serviceProviderId;
 
                 $.ajax({
@@ -67,7 +58,6 @@ $(function () {
             async: false,
             success: function (data) {
                 loggedInUser = data.LoggedInUser;
-                //operatorName = loggedInUser.operatorNameInProfile;
 
                 // hide the operator / serviceProvider drop-down according to logged in user
                 hideDropDown(loggedInUser);
@@ -81,7 +71,6 @@ $(function () {
                     $("#yearContainer").removeClass("col-top-pad");
                     $("#monthContainer").removeClass("col-top-pad");
                 }
-
 
                 if(!(loggedInUser.isAdmin)) {
                     $("#directiondd").hide();
@@ -144,12 +133,9 @@ $(function () {
             getProviderData();
         });
     });
-    
+
     function setConfDara() {
-    	conf.applicationf=$("#button-app").text();
-		//conf.operatorf=$("#button-operator").text();
 		conf.spf= $("#button-sp").text();
-		conf.apif=$("#button-api").text();
     };
 
     $("#button-initiate-reprice").click(function () {
@@ -161,29 +147,11 @@ $(function () {
         getGadgetLocation(function (gadget_Location) {
             gadgetLocation = gadget_Location;
             $("#output").html("");
-            /*if(operatorSelected) {
-                conf.operatorName =  selectedOperator;
-            } else {
-                conf.operatorName =  operatorName;
-            } */
             setConfDara();
             conf.serviceProvider = serviceProviderId;
 
             var year = $("#button-year").val();
             var month = $("#button-month").val();
-            //var isDirectionSet = true;
-
-            /*if(loggedInUser.isAdmin) {
-                var direction = $("#button-dir").val();
-                if (direction === "") {
-                    isDirectionSet = false;
-                    $("#popupcontent p").html('Please select direction');
-                    $('#notifyModal').modal('show');
-                    return;
-                } else {
-                    conf.direction = direction;
-                }
-            }*/
 
             if(year === "") {
                 $("#popupcontent p").html('Please select year');
@@ -192,65 +160,45 @@ $(function () {
             else if(month === "") {
                 $("#popupcontent p").html('Please select month');
                 $('#notifyModal').modal('show');
-            } //else if (isDirectionSet) {
+            }
 
-                $("#list-summery-report").removeClass("hidden");
-                conf.year = year;
-                conf.month = month;
+            $("#list-summery-report").removeClass("hidden");
+            conf.year = year;
+            conf.month = month;
 
-                var btn = $("#button-generate-bill-csv");
-                btn.prop('disabled', true);
-                setTimeout(function () {
-                    btn.prop('disabled', false);
-                }, 2000);
-console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
-                $.ajax({
-                    url: gadgetLocation + '/gadget-controller.jag?action=generateCSV',
-                    method: METHOD.POST,
-                    data: JSON.stringify(conf),
-                    contentType: CONTENT_TYPE,
-                    async: false,
-                    success: function (data) {
+            var btn = $("#button-generate-bill-csv");
+            btn.prop('disabled', true);
+            setTimeout(function () {
+            btn.prop('disabled', false);
+            }, 2000);
+            $.ajax({
+                url: gadgetLocation + '/gadget-controller.jag?action=generateCSV',
+                method: METHOD.POST,
+                data: JSON.stringify(conf),
+                contentType: CONTENT_TYPE,
+                async: false,
+                success: function (data) {
 
-                        $("#list-available-report").show();
-                        $("#output").html('<div id="success-message" class="alert alert-success"><strong>Report is generating</strong> '
-                            + "Please refresh the billing report"
-                            + '</div>' + $("#output").html());
-                        $('#success-message').fadeIn().delay(2000).fadeOut();
-                    }
-                });
-           // }
+                    $("#list-available-report").show();
+                    $("#output").html('<div id="success-message" class="alert alert-success"><strong>Report is generating</strong> '
+                    + "Please refresh the billing report"
+                    + '</div>' + $("#output").html());
+                    $('#success-message').fadeIn().delay(2000).fadeOut();
+                }
+           });
         });
     });
-
 
     $("#button-generate-error-csv").click(function () {
         getLoggedInUser();
         getGadgetLocation(function (gadget_Location) {
             gadgetLocation = gadget_Location;
             $("#output").html("");
-            /*if(operatorSelected) {
-                conf.operatorName =  selectedOperator;
-            } else {
-                conf.operatorName =  operatorName;
-            } */
+
             conf.serviceProvider = serviceProviderId;
             setConfDara();
             var year = $("#button-year").val();
             var month = $("#button-month").val();
-            //var isDirectionSet = true;
-
-            /*if(loggedInUser.isAdmin) {
-                var direction = $("#button-dir").val();
-                if (direction === "") {
-                    isDirectionSet = false;
-                    $("#popupcontent p").html('Please select direction');
-                    $('#notifyModal').modal('show');
-                    return;
-                } else {
-                    conf.direction = direction;
-                }
-            }*/
 
             if(year === "") {
                 $("#popupcontent p").html('Please select year');
@@ -259,34 +207,32 @@ console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
             else if(month === "") {
                 $("#popupcontent p").html('Please select month');
                 $('#notifyModal').modal('show');
-            } //else if (isDirectionSet) {
+            }
 
-                $("#list-error-report").removeClass("hidden");
-                conf.year = year;
-                conf.month = month;
+            $("#list-error-report").removeClass("hidden");
+            conf.year = year;
+            conf.month = month;
 
-                var btn = $("#button-generate-bill-csv");
-                btn.prop('disabled', true);
-                setTimeout(function () {
-                    btn.prop('disabled', false);
-                }, 2000);
+            var btn = $("#button-generate-bill-csv");
+            btn.prop('disabled', true);
+            setTimeout(function () {
+            btn.prop('disabled', false);
+            }, 2000);
 
-                $.ajax({
-                    url: gadgetLocation + '/gadget-controller.jag?action=generateErrorCSV',
-                    method: METHOD.POST,
-                    data: JSON.stringify(conf),
-                    contentType: CONTENT_TYPE,
-                    async: false,
-                    success: function (data) {
-
-                        $("#list-error-report").show();
-                        $("#output").html('<div id="success-message" class="alert alert-success"><strong>Report is generating</strong> '
-                            + "Please refresh the billing error report"
-                            + '</div>' + $("#output").html());
-                        $('#success-message').fadeIn().delay(2000).fadeOut();
-                    }
-                });
-            //}
+            $.ajax({
+                url: gadgetLocation + '/gadget-controller.jag?action=generateErrorCSV',
+                method: METHOD.POST,
+                data: JSON.stringify(conf),
+                contentType: CONTENT_TYPE,
+                async: false,
+                success: function (data) {
+                    $("#list-error-report").show();
+                    $("#output").html('<div id="success-message" class="alert alert-success"><strong>Report is generating</strong> '
+                    + "Please refresh the billing error report"
+                    + '</div>' + $("#output").html());
+                    $('#success-message').fadeIn().delay(2000).fadeOut();
+                }
+            });
         });
     });
 
@@ -297,28 +243,10 @@ console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
             var serviceProviderName = $("#button-sp").val();
 
             gadgetLocation = gadget_Location;
-            /*if(operatorSelected) {
-                conf.operatorName =  selectedOperator;
-            } else {
-                conf.operatorName =  operatorName;
-            }*/
             setConfDara();
             conf.serviceProvider = serviceProviderId;
             var year = $("#button-year").val();
             var month = $("#button-month").val();
-            //var isDirectionSet = true;
-
-            /*if(loggedInUser.isAdmin) {
-                var direction = $("#button-dir").val();
-                if (direction === "") {
-                    isDirectionSet = false;
-                    $("#popupcontent p").html('Please select direction');
-                    $('#notifyModal').modal('show');
-                    return;
-                } else {
-                    conf.direction = direction;
-                }
-            }*/
 
             if(year === "") {
                 $("#popupcontent p").html('Please select year');
@@ -326,35 +254,34 @@ console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
             } else if(month === "") {
                 $("#popupcontent p").html('Please select month');
                 $('#notifyModal').modal('show');
-            } //else if (isDirectionSet) {
-                conf.year = year;
-                conf.month = month;
-                $("#list-the-bill").removeClass("hidden");
+            }
+
+            conf.year = year;
+            conf.month = month;
+            $("#list-the-bill").removeClass("hidden");
 
 
-                var btn = $("#button-generate-bill-pdf");
-                btn.prop('disabled', true);
-                setTimeout(function () {
-                    btn.prop('disabled', false);
-                }, 2000);
+            var btn = $("#button-generate-bill-pdf");
+            btn.prop('disabled', true);
+            setTimeout(function () {
+            btn.prop('disabled', false);
+            }, 2000);
 
-                setTimeout(function () {
-                    $.ajax({
-                        url: gadgetLocation + '/gadget-controller.jag?action=generateBill',
-                        method: "POST",
-                        data: JSON.stringify(conf),
-                        contentType: "application/json",
-                        async: true,
-                        success: function (data) {
-                            $("#output").html('<div id="success-message" class="alert alert-success"><strong>Report is generating</strong> '
-                                + "Please refresh the billing report"
-                                + '</div>' + $("#output").html());
-                            $('#success-message').fadeIn().delay(2000).fadeOut();
-                        }
-                    });
-                }, 100);
-
-            //}
+            setTimeout(function () {
+                $.ajax({
+                    url: gadgetLocation + '/gadget-controller.jag?action=generateBill',
+                    method: "POST",
+                    data: JSON.stringify(conf),
+                    contentType: "application/json",
+                    async: true,
+                    success: function (data) {
+                        $("#output").html('<div id="success-message" class="alert alert-success"><strong>Report is generating</strong> '
+                        + "Please refresh the billing report"
+                        + '</div>' + $("#output").html());
+                        $('#success-message').fadeIn().delay(2000).fadeOut();
+                    }
+                });
+            }, 100);
         });
     });
 
@@ -387,7 +314,6 @@ console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
 								"</li>");
 						}
 						$("#output").html($("#output").html() + "<ul/>")
-						
 					}
 
                 }
@@ -424,7 +350,6 @@ console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
 						}
 						$("#output").html($("#output").html() + "<ul/>")
 					}
-
                 }
             });
 
@@ -461,7 +386,6 @@ console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
 						}
 						$("#output").html($("#output").html() + "<ul/>")
 					}
-
                 }
             });
 
@@ -514,84 +438,20 @@ console.log(":::::::::::::::::::::  " + JSON.stringify(conf));
         registerMonthEvent();
     };
 
-    /*$("#button-dir").click(function () {
-            var direction = $("#button-dir").val();
-            if (direction == 'nb') {
-                $("#operatordd").hide();
-            }
-    });*/
-
     getGadgetLocation(function (gadget_Location) {
         gadgetLocation = gadget_Location;
         init();
         getLoggedInUser();
         createYearSelectBox();
-        //loadOperator();
         loadSP();
-        /*function loadOperator () {
 
-            if (loggedInUser.isOperatorAdmin) {
-                loadSP(loggedInUser.operatorNameInProfile);
-            } else {
-                conf[PROVIDER_CONF][TABLE_NAME] = STREAMS.OPERATOR_SUMMERY;
-                conf[PROVIDER_CONF][PROVIDER_NAME] = TYPE.OPERATOR;
-                //conf.operatorName = "all";
-                //operatorName = "all";
-                $.ajax({
-                    url: gadgetLocation + '/gadget-controller.jag?action=getData',
-                    method: METHOD.POST,
-                    data: JSON.stringify(conf),
-                    contentType: CONTENT_TYPE,
-                    async: false,
-                    success: function (data) {
-                        $("#dropdown-operator").empty();
-                        var operatorsItems = "";
-                        var operatorNames = [];
-                        var loadedOperator = [];
-                        operatorNames.push(operatorName);
-                        operatorsItems += '<li><a data-val="all" href="#">All Operator</a></li>';
-                        for (var i = 0; i < data.length; i++) {
-                            var operator = data[i];
-                            if ($.inArray(operator.operatorName, loadedOperator) < 0) {
-                                operatorsItems += '<li><a data-val=' + operator.operatorName + ' href="#">' + operator.operatorName + '</a></li>';
-                                if(operator.operatorName.toString() != "all") {
-                                    operatorNames.push(" " + "\"" + operator.operatorName +"\"");
-                                }
-                                loadedOperator.push(operator.operatorName);
-                            }
-                        }
-                        $("#dropdown-operator").html($("#dropdown-operator").html() + operatorsItems);
-                        //$("#button-operator").val('<li><a data-val="all" href="#">All Operator</a></li>');
-
-                        loadSP(operatorNames);
-                        /*$("#dropdown-operator li a").click(function () {
-                            $("#button-operator").text($(this).text());
-                            $("#button-operator").append('&nbsp;<span class="caret"></span>');
-                            $("#button-operator").val($(this).text());
-                            //operatorNames = $(this).data('val');
-                            if ($(this).data('val') == 'all'){
-                                loadSP(operatorNames);
-                            } else {
-                                loadSP($(this).data('val'));
-                            }                            
-                            operatorSelected = true;
-                        });
-                    }
-                });
-            }
-        } */
-
-        function loadSP (/*clickedOperator*/) {
+        function loadSP () {
             getLoggedInUser();
             conf[PROVIDER_CONF][TABLE_NAME] = STREAMS.API_SUMMERY;
             conf[PROVIDER_CONF][PROVIDER_NAME] = TYPE.OPERATOR;
 
-            //conf.operatorName = clickedOperator;
-            //selectedOperator = conf.operatorName;
             serviceProviderId = 0;
-console.log('logged in user -- '+JSON.stringify(loggedInUser));
             if (!loggedInUser.isServiceProvider) {
-console.log('logged in user is not serviceprovider ----- ');
                 $.ajax({
                     url: gadgetLocation + '/gadget-controller.jag?action=getData',
                     method: METHOD.POST,
@@ -600,7 +460,6 @@ console.log('logged in user is not serviceprovider ----- ');
                     async: false,
                     success: function (data) {
                         $("#dropdown-sp").empty();
-       console.log('getdata data is  ----- ' + JSON.stringify(data));
                         $("#button-sp").text('All Service provider');
 						$("#button-sp").append('&nbsp;<span class="caret"></span>');
                         var spItems = '';
@@ -626,7 +485,7 @@ console.log('logged in user is not serviceprovider ----- ');
                             $("#button-sp").text($(this).text());
                             $("#button-sp").append('&nbsp;<span class="caret"></span>');
                             $("#button-sp").val($(this).text());
-                            serviceProviderId = $(this).data('val'); // serviceprovider id should be id not name
+                            serviceProviderId = $(this).data('val');
 
                             if(serviceProviderId != "0"){
                                 conf.serviceProvider = serviceProviderId;
@@ -642,17 +501,6 @@ console.log('logged in user is not serviceprovider ----- ');
         $("#button-type").val("Billing");
 
     });
-
-    /*$("#dropdown-direction li a").click(function () {
-        if ($(this).data('val') == 'nb') {
-            $("#operatordd").hide();
-        } else {
-            $("#operatordd").show();
-        }
-        $("#button-dir").text($(this).text());
-        $("#button-dir").append('&nbsp;<span class="caret"></span>');
-        $("#button-dir").val($(this).data('val'));
-    });*/
 
     function registerMonthEvent () {
         $("#dropdown-month li a").click(function () {
