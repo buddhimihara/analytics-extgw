@@ -96,7 +96,7 @@
             log.info("tableName   >> "+tableName);
             log.info("report Columns >> "+reportColumns);
 
-            service.generateCSVReport(tableName, batchQuery, reportName, reportMaxLength, reportType, reportColumns);
+            service.generateCSVReport(tableName, batchQuery, reportName, reportMaxLength, reportType, reportColumns, null, null, null);
 
             print({'message': 'Report is generating'});
 

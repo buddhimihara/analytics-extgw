@@ -318,6 +318,26 @@
             </outputDirectory>
         </fileSet>
 
+        <!-- add third party libs-->
+        <fileSet>
+            <directory>
+                customize/libs/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/components/lib/
+            </outputDirectory>
+        </fileSet>
+
+        <!-- add jasper report template-->
+        <fileSet>
+            <directory>
+                customize/report-template/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/conf/
+            </outputDirectory>
+        </fileSet>
+
         <fileSet>
             <directory>
                 customize/das-footer/
@@ -500,10 +520,10 @@
         </file>
         <!--a custom wso2server.bat file is included later on-->
         <!--<file>-->
-            <!--<source>target/wso2carbon-core-${carbon.kernel.version}/bin/wso2server.bat</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
+        <!--<source>target/wso2carbon-core-${carbon.kernel.version}/bin/wso2server.bat</source>-->
+        <!--<outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>-->
+        <!--<filtered>true</filtered>-->
+        <!--<fileMode>644</fileMode>-->
         <!--</file>-->
         <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/repository/README.txt</source>
@@ -729,7 +749,7 @@
             <fileMode>644</fileMode>
         </file>
 
-		<!-- Analytics REST APIs WebApp -->
+        <!-- Analytics REST APIs WebApp -->
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/analytics.war
@@ -1055,12 +1075,12 @@
         </file>
 
         <!--Siddhi conf-->
-<!--        <file>
-            <source>repository/conf/siddhi/siddhi.extension</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/siddhi/
-            </outputDirectory>
-            <filtered>true</filtered>
-        </file>-->
+        <!--        <file>
+                    <source>repository/conf/siddhi/siddhi.extension</source>
+                    <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/siddhi/
+                    </outputDirectory>
+                    <filtered>true</filtered>
+                </file>-->
 
         <!-- END CEP -->
 
@@ -1143,24 +1163,24 @@
 
 
         <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps/org.wso2telco.analytics.hub_report-alert-generation.car-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps</outputDirectory>-->
-            <!--&lt;!&ndash;commented since this tag causes issues in maven assembly plugin when copying zip formats&ndash;&gt;-->
-            <!--&lt;!&ndash;filtered>true</filtered&ndash;&gt;-->
-            <!--<fileMode>644</fileMode>-->
+        <!--<source>-->
+        <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps/org.wso2telco.analytics.hub_report-alert-generation.car-->
+        <!--</source>-->
+        <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps</outputDirectory>-->
+        <!--&lt;!&ndash;commented since this tag causes issues in maven assembly plugin when copying zip formats&ndash;&gt;-->
+        <!--&lt;!&ndash;filtered>true</filtered&ndash;&gt;-->
+        <!--<fileMode>644</fileMode>-->
         <!--</file>-->
 
 
         <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/data/report.jrxml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>-->
-            <!--&lt;!&ndash;commented since this tag causes issues in maven assembly plugin when copying zip formats&ndash;&gt;-->
-            <!--&lt;!&ndash;filtered>true</filtered&ndash;&gt;-->
-            <!--<fileMode>644</fileMode>-->
+        <!--<source>-->
+        <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/data/report.jrxml-->
+        <!--</source>-->
+        <!--<outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>-->
+        <!--&lt;!&ndash;commented since this tag causes issues in maven assembly plugin when copying zip formats&ndash;&gt;-->
+        <!--&lt;!&ndash;filtered>true</filtered&ndash;&gt;-->
+        <!--<fileMode>644</fileMode>-->
         <!--</file>-->
 
         <!-- Analytics JS APIs artifacts -->
@@ -1206,9 +1226,5 @@
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/theme/images/
             </outputDirectory>
         </file>
-
-
-
-
     </files>
 </assembly>

@@ -281,6 +281,67 @@
                     }
                 }
             }
+        },
+        {
+            "id": "billing-report",
+            "title": "Billing",
+            "isanon": false,
+            "content": {
+                "default": {
+                    "61197f94e6a0445e1279303cb8c46c40": [
+                        {
+                            "id": "HubAnalytics-Gadget-BillingReport-0",
+                            "content": {
+                                "id": "HubAnalytics-Gadget-BillingReport",
+                                "title": "Billing",
+                                "type": "gadget",
+                                "thumbnail": "fs://gadget/HubAnalytics-Gadget-Commons/thumbnail.png",
+                                "data": {
+                                    "url": "fs://gadget/HubAnalytics-Gadget-BillingReport/gadget.xml"
+                                },
+                                "styles": {
+                                    "title": "Billing",
+                                    "borders": true
+                                },
+                                "options": {
+                                    "refreshInterval": {
+                                        "type": "STRING",
+                                        "title": "Refresh Interval",
+                                        "value": "1000000",
+                                        "options": [],
+                                        "required": false
+                                    }
+                                },
+                                "locale_titles": {}
+                            }
+                        }
+                    ]
+                },
+                "anon": {}
+            },
+            "views": {
+                "content": {
+                    "default": {
+                        "blocks": [
+                            {
+                                "id": "61197f94e6a0445e1279303cb8c46c40",
+                                "x": 0,
+                                "y": 0,
+                                "width": 12,
+                                "height": 12,
+                                "banner": false
+                            }
+                        ],
+                        "name": "Default View",
+                        "roles": [
+                            "admin",
+                            "Internal/subscriber",
+                            "operatoradmin"
+                        ]
+                    }
+                },
+                "fluidLayout": false
+            }
         }
     ],
     "menu":[
@@ -289,36 +350,34 @@
             "isanon":false,
             "ishidden":false,
             "title":"Traffic",
-            "subordinates":[
-
-            ]
+            "subordinates":[]
         },
         {
             "id":"transaction-report",
             "isanon":false,
             "ishidden":false,
             "title":"Transaction",
-            "subordinates":[
-
-            ]
+            "subordinates":[]
         },
         {
             "id":"customer-care-report",
             "isanon":false,
             "ishidden":false,
             "title":"Dev Support",
-            "subordinates":[
-
-            ]
+            "subordinates":[]
+        },
+        {
+            "id": "billing-report",
+            "ishidden": false,
+            "title": "Billing",
+            "subordinates": []
         },
         {
             "id":"response-time-report",
             "isanon":false,
             "ishidden":false,
             "title":"Response Time",
-            "subordinates":[
-
-            ]
+            "subordinates":[]
         }
     ],
     "hideAllMenuItems":false,
